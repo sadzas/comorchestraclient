@@ -1,0 +1,6 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+.jumbotron {
+    padding-top: 40px;
+    padding-bottom: 40px;
+}

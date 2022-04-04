@@ -97,6 +97,9 @@ function getMessage(mensaje) {
         case 3104:
             store.dispatch(usuarioMenuColaPropiedades(msg.value26))
             break
+        case 4003:
+            store.dispatch(usuarioEstados(msg.value14))
+            break
         // 4101: Se envian los datos de: Gerencia => Departamento => Sector de acuerdo al perfil obtenido.
         case 4101:
             store.dispatch(menuSectores(msg.value20))
@@ -123,6 +126,18 @@ function getMessage(mensaje) {
         case 4108:
             store.dispatch(menuEstadosUsuario(msg.value11))
             break
+        case 4401:
+            store.dispatch(menuHabilidades(msg.value25))
+            store.dispatch(menuSectoresHabilidades(msg.value29))
+            break
+        case 4402:
+            store.dispatch(menuHabilidadesGrupos(msg.value31))
+            break
+        case 4601:
+            store.dispatch(menuEstados(msg.value24))
+            break
+        case 4603:
+            
         case 5001:
             store.dispatch(alertaCambiaFlagTitulo(msg.value6))
             store.dispatch(alertaCambiaFlagMensaje(msg.value7))

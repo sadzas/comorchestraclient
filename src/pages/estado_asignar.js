@@ -5,14 +5,13 @@ import Typography from '@mui/material/Typography';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { styled } from '@mui/material/styles';
 import SelectEstados from '../componentes/SelectEstados'
 import SelectUsuariosSector from '../componentes/SelectUsuariosSector'
 import SelectSector from '../componentes/SelectSector'
 import { useDispatch, useSelector } from 'react-redux';
 import { armoMensajeSaliente } from '../utils/Helpers';
 import { msgSalienteAlmacena } from '../redux/actions';
-import { usuarioId, menuUsuarios } from '../redux/selectors';
+import { usuarioId } from '../redux/selectors';
 import LoadingButton from '@mui/lab/LoadingButton';
 import SaveIcon from '@mui/icons-material/Save';
 import { useState } from 'react';
@@ -25,20 +24,12 @@ const darkTheme = createTheme({
   },
 });
 
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
-
 export default function EstadoAsignar() {
   const dispatch = useDispatch()
-  const [usuarios, setUsuarios] = useState([]);
-  const [sector, setSector] = useState('');
-  const [estados, setEstados] = useState([]);
+  const [usuarios, setUsuarios] = useState([])
+  const [sector, setSector] = useState('')
+  const [estados, setEstados] = useState([])
   const usuario_id = useSelector(usuarioId)
-  const menu_usuarios = useSelector(menuUsuarios)
   let blockEstados = false
 
   const sectorSelecciona = (event) => {
@@ -66,9 +57,8 @@ export default function EstadoAsignar() {
 
   const enviarInformacion = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-
-    const mensaje = armoMensajeSaliente(4603, usuario_id, "", "", "", "", "", "", "", "", "", usuarios, estados)
+    
+    const mensaje = armoMensajeSaliente(4603, usuario_id, sector, "", "", "", "", "", "", "", "", usuarios, estados)
     dispatch(msgSalienteAlmacena(mensaje))
   };
 
@@ -92,7 +82,7 @@ export default function EstadoAsignar() {
             <Grid container rowSpacing={2} columnSpacing={{ xs: 6, sm: 2, md: 3 }} paddingBottom={1} >
               <Grid item xs={6}>
                 <Box sx={{ '& > :not(style)': { width: '100%' }, }} noValidate autoComplete="off" required>
-                  <SelectSector valor={sector} handleChange={sectorSelecciona} />
+                  <SelectSector valor1={sector} handleChange={sectorSelecciona} />
                 </Box>
               </Grid>
             </Grid>

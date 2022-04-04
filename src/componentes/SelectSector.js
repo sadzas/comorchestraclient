@@ -21,17 +21,17 @@ const MenuProps = {
 
 export default function SelectSector(props) {
     const menu_sectores = useSelector(menuSectores)
-    const [lsectores, setLsectores] = useState(menu_sectores);
+    const [sectores, setSectores] = useState(menu_sectores);
 
     useEffect(() => {
-        setLsectores(
+        setSectores(
             menu_sectores
         );
     }, [menu_sectores]);
 
-    let sectores = []
-    Object.entries(lsectores).forEach(([key, v]) => {
-        sectores.push({ id: key, value: v });
+    let imprime_sectores = []
+    Object.entries(sectores).forEach(([key, v]) => {
+        imprime_sectores.push({ id: key, value: v });
     });
 
     return (
@@ -45,7 +45,7 @@ export default function SelectSector(props) {
                     label="Sector"
                     onChange={props.handleChange}
                     >
-                    {sectores.map((sector) => (
+                    {imprime_sectores.map((sector) => (
                         <MenuItem key={sector.id} value={parseInt(sector.id)}>
                             <ListItemText primary={sector.value} />
                         </MenuItem>

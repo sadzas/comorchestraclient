@@ -6,7 +6,6 @@ import TextField from '@mui/material/TextField';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { styled } from '@mui/material/styles';
 import SelectSector from '../componentes/SelectSector';
 import { useDispatch, useSelector } from 'react-redux';
 import { msgSalienteAlmacena } from '../redux/actions';
@@ -29,13 +28,6 @@ const darkTheme = createTheme({
   },
 });
 
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
-
 export default function ColaEditar() {
   const dispatch = useDispatch()
   const [sector, setSector] = useState('');
@@ -51,7 +43,6 @@ export default function ColaEditar() {
     );
   }, [menu_colas]);
 
-  const cola_numero = [];
   const cola_estrategia = [
     { id: 1, estrategia_nombre: 'Lineal' },
     { id: 2, estrategia_nombre: 'Lineal con Memoria' },
@@ -60,6 +51,7 @@ export default function ColaEditar() {
   const cola_ringueo = []
   const cola_espera = []
   const cola_autopausa = []
+  const cola_prioridad = []
 
   for (let j = 5; j < 50; j += 5) {
     cola_ringueo.push(j);
@@ -71,6 +63,10 @@ export default function ColaEditar() {
 
   for (let h = 5; h < 120; h += 5) {
     cola_autopausa.push(h);
+  }
+
+  for (let k = 1; k < 99; k++) {
+    cola_prioridad.push(k);
   }
 
   const manejaCambios = (event) => {
@@ -88,6 +84,7 @@ export default function ColaEditar() {
 
   const sectorSelecciona = (event) => {
     setSector(event.target.value)
+    console.log("Selecciono el sector: ",event.target.value)
   };
 
   const enviarInformacion = (event) => {
@@ -99,10 +96,10 @@ export default function ColaEditar() {
     datosCola.push(colaNueva.cola_ringueo)
     datosCola.push(colaNueva.cola_espera)
     datosCola.push(colaNueva.cola_autopausa)
-    
-    console.log(3002, usuario_id, sector, "", "", "", colaNueva.cola_nombre, "", "", "", "", datosCola)
+    datosCola.push(colaNueva.cola_prioridad)
 
     const mensaje = armoMensajeSaliente(3002, usuario_id, sector, "", "", "", colaNueva.cola_nombre, "", "", "", "", datosCola)
+    console.log("El sector que se envia es: ",sector)
     dispatch(msgSalienteAlmacena(mensaje))
 
     setSector('')
@@ -205,6 +202,21 @@ export default function ColaEditar() {
                     </Select>
                   </FormControl>
                 </Box>
+
+                <Box sx={{ '& > :not(style)': { width: '100%' }, }} paddingTop={2} noValidate autoComplete="off" required>
+                  <FormControl fullWidth>
+                    <InputLabel id="select-prioridad-label">Prioridad Cola</InputLabel>
+                    <Select labelId="select-prioridad-label" id="cola_prioridad" name="cola_prioridad" value={colaNueva.cola_prioridad ? colaNueva.cola_prioridad : ''} onChange={manejaCambios} label="Prioridad Cola">
+                      <MenuItem value="">
+                        <em></em>
+                      </MenuItem>
+                      {cola_prioridad.map((id) => (
+                        <MenuItem key={id} value={id}>{id}</MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Box>
+
               </Grid>
             </Grid>
 
@@ -218,7 +230,7 @@ export default function ColaEditar() {
             <Grid container rowSpacing={2} columnSpacing={{ xs: 6, sm: 2, md: 3 }} paddingBottom={1} >
               <Grid item xs={6}>
                 <Box sx={{ '& > :not(style)': { width: '100%' }, }} noValidate autoComplete="off" required>
-                  <SelectSector valor={sector} handleChange={sectorSelecciona} />
+                  <SelectSector valor1={sector} handleChange={sectorSelecciona} />
                 </Box>
               </Grid>
             </Grid>

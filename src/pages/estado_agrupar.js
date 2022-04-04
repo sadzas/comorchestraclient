@@ -5,7 +5,6 @@ import Typography from '@mui/material/Typography';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { styled } from '@mui/material/styles';
 import SelectEstados from '../componentes/SelectEstados'
 import TextField from '@mui/material/TextField';
 import SelectSector from '../componentes/SelectSector'
@@ -25,16 +24,10 @@ const darkTheme = createTheme({
   },
 });
 
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
-
 export default function EstadoAgrupar() {
   const dispatch = useDispatch()
   const [sector, setSector] = useState('');
+  const [grupoNombre, setGrupoNombre] = useState('')
   const [estados, setEstados] = useState([]);
   const usuario_id = useSelector(usuarioId)
   let blockEstados = false
@@ -52,11 +45,14 @@ export default function EstadoAgrupar() {
     );
   };
 
+  const manejaCambios = (event) => {
+    setGrupoNombre(event.target.value)
+  }
+
   const enviarInformacion = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
 
-    const mensaje = armoMensajeSaliente(4602, usuario_id, sector, "", "", "", data.get('grupo_nombre'), "", "", "", "", estados)
+    const mensaje = armoMensajeSaliente(4602, usuario_id, sector, "", "", "", grupoNombre, "", "", "", "", estados)
     dispatch(msgSalienteAlmacena(mensaje))
   };
 
@@ -80,7 +76,7 @@ export default function EstadoAgrupar() {
             <Grid container rowSpacing={2} columnSpacing={{ xs: 6, sm: 2, md: 3 }} paddingBottom={1} >
               <Grid item xs={6}>
                 <Box sx={{ '& > :not(style)': { width: '100%' }, }} noValidate autoComplete="off" required>
-                  <SelectSector valor={sector} handleChange={sectorSelecciona} />
+                  <SelectSector valor1={sector} handleChange={sectorSelecciona} />
                 </Box>
               </Grid>
             </Grid>
@@ -92,10 +88,10 @@ export default function EstadoAgrupar() {
                 </AppBar>
               </ThemeProvider>
             </Box>
-            <Grid container rowSpacing={2} columnSpacing={{ xs: 6, sm: 2, md: 3 }} paddingBottom={3}>
+            <Grid container rowSpacing={2} columnSpacing={{ xs: 6, sm: 2, md: 3 }} paddingBottom={1}>
               <Grid item xs={6}>
                 <Box sx={{ '& > :not(style)': { width: '100%' }, }} noValidate autoComplete="off" required>
-                  <TextField id="grupo_nombre" name="grupo_nombre" label="Nombre" variant="standard" size="small" />
+                  <TextField id="grupo_nombre" name="grupo_nombre" label="Nombre" value={grupoNombre} variant="outlined" onChange={manejaCambios} />
                 </Box>
               </Grid>
             </Grid>
@@ -107,9 +103,9 @@ export default function EstadoAgrupar() {
                 </AppBar>
               </ThemeProvider>
             </Box>
-            <Grid container rowSpacing={2} columnSpacing={{ xs: 6, sm: 2, md: 3 }} paddingTop={1} paddingBottom={1}>
-              <Grid item xs={12}>
-                <Box sx={{ '& > :not(style)': { width: '80%' }, }} noValidate autoComplete="off" required>
+            <Grid container rowSpacing={2} columnSpacing={{ xs: 6, sm: 2, md: 3 }} paddingBottom={1}>
+              <Grid item xs={6}>
+                <Box sx={{ '& > :not(style)': { width: '100%' }, }} noValidate autoComplete="off" required>
                   <SelectEstados ver={blockEstados} valor1={sector} valor2={estados} handleChange={estadoSelecciona} />
                 </Box>
               </Grid>
@@ -120,6 +116,7 @@ export default function EstadoAgrupar() {
                 Guardar
               </LoadingButton>
             </Box>
+
           </Box>
         </Paper>
       </Grid>

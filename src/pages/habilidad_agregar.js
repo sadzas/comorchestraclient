@@ -6,13 +6,12 @@ import TextField from '@mui/material/TextField';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { styled } from '@mui/material/styles';
 import SelectSector from '../componentes/SelectSector';
 import { useDispatch, useSelector } from 'react-redux';
 import { msgSalienteAlmacena } from '../redux/actions';
 import { armoMensajeSaliente } from '../utils/Helpers';
 import { usuarioId } from '../redux/selectors';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import LoadingButton from '@mui/lab/LoadingButton';
 import SaveIcon from '@mui/icons-material/Save';
 
@@ -24,27 +23,24 @@ const darkTheme = createTheme({
   },
 });
 
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
-
 export default function UsuarioNuevo() {
   const dispatch = useDispatch()
   const [sector, setSector] = useState('');
+  const [habilidadNombre, setHabilidadNombre] = useState('')
   const usuario_id = useSelector(usuarioId)
 
   const sectorSelecciona = (event) => {
     setSector(event.target.value)
   };
 
+  const manejaCambios = (event) => {
+    setHabilidadNombre(event.target.value)
+  }
+
   const enviarInformacion = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
 
-    const mensaje = armoMensajeSaliente(4401, usuario_id, sector, "", "", "", data.get('habilidad_nombre'))
+    const mensaje = armoMensajeSaliente(4401, usuario_id, sector, "", "", "", habilidadNombre)
     dispatch(msgSalienteAlmacena(mensaje))
   };
 
@@ -68,7 +64,7 @@ export default function UsuarioNuevo() {
             <Grid container rowSpacing={2} columnSpacing={{ xs: 6, sm: 2, md: 3 }} paddingBottom={1} >
               <Grid item xs={6}>
                 <Box sx={{ '& > :not(style)': { width: '100%' }, }} noValidate autoComplete="off" required>
-                  <SelectSector valor={sector} handleChange={sectorSelecciona} />
+                  <SelectSector valor1={sector} handleChange={sectorSelecciona} />
                 </Box>
               </Grid>
             </Grid>
@@ -83,7 +79,7 @@ export default function UsuarioNuevo() {
             <Grid container rowSpacing={2} columnSpacing={{ xs: 6, sm: 2, md: 3 }} paddingBottom={3}>
               <Grid item xs={6}>
                 <Box sx={{ '& > :not(style)': { width: '100%' }, }} noValidate autoComplete="off" required>
-                  <TextField id="habilidad_nombre" name="habilidad_nombre" label="Nombre" variant="standard" size="small" />
+                  <TextField id="habilidad_nombre" name="habilidad_nombre" label="Nombre" variant="outlined" onChange={manejaCambios}/>
                 </Box>
               </Grid>
             </Grid>

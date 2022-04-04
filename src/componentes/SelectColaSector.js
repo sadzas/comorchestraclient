@@ -20,18 +20,18 @@ const MenuProps = {
 
 export default function SelectCola(props) {
     const menu_colas = useSelector(menuColas)
-    const [lcolas, setLcolas] = useState(menu_colas);
+    const [colas, setColas] = useState(menu_colas);
 
     useEffect(() => {
-        setLcolas(
+        setColas(
             menu_colas
         );
     }, [menu_colas]);
 
-    let colas = []
-    Object.entries(lcolas).forEach(([key, v]) => {
+    let imprime_colas = []
+    Object.entries(colas).forEach(([key, v]) => {
         if (v.id_sector === props.valor1) {
-            colas.push({ id: key, value: v.cola_nombre });
+            imprime_colas.push({ id: key, value: v.cola_nombre });
         }
     });
 
@@ -46,7 +46,7 @@ export default function SelectCola(props) {
                     label="Cola"
                     onChange={props.handleChange}
                 >
-                    {colas.map((cola) => (
+                    {imprime_colas.map((cola) => (
                         <MenuItem key={cola.id} value={cola.id}>{cola.value}
                         </MenuItem>
                     ))}

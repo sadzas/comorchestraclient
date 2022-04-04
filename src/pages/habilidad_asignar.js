@@ -5,14 +5,13 @@ import Typography from '@mui/material/Typography';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { styled } from '@mui/material/styles';
 import SelectHabilidades from '../componentes/SelectHabilidades'
 import SelectUsuariosSector from '../componentes/SelectUsuariosSector'
 import SelectSector from '../componentes/SelectSector'
 import { useDispatch, useSelector } from 'react-redux';
 import { armoMensajeSaliente } from '../utils/Helpers';
 import { msgSalienteAlmacena } from '../redux/actions';
-import { usuarioId, menuUsuarios } from '../redux/selectors';
+import { usuarioId } from '../redux/selectors';
 import LoadingButton from '@mui/lab/LoadingButton';
 import SaveIcon from '@mui/icons-material/Save';
 import { useState } from 'react';
@@ -25,20 +24,12 @@ const darkTheme = createTheme({
   },
 });
 
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
-
 export default function HabilidadAsignar() {
   const dispatch = useDispatch()
   const [usuarios, setUsuarios] = useState([]);
   const [sector, setSector] = useState('');
   const [habilidades, setHabilidades] = useState([]);
   const usuario_id = useSelector(usuarioId)
-  const menu_usuarios = useSelector(menuUsuarios)
   let blockHabilidades = false
 
   const sectorSelecciona = (event) => {
@@ -64,15 +55,18 @@ export default function HabilidadAsignar() {
 
   const enviarInformacion = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
 
-    let parseo = []
+    let enviar_habilidades = []
     Object.entries(habilidades).forEach(([key, v]) => {
-      parseo.push(Math.floor(key), v)
+      enviar_habilidades.push(Math.floor(key), v)
     });
 
-    const mensaje = armoMensajeSaliente(4403, usuario_id, "", "", "", "", "", "", "", "", "", usuarios, parseo)
+    const mensaje = armoMensajeSaliente(4403, usuario_id, "", "", "", "", "", "", "", "", "", usuarios, enviar_habilidades)
     dispatch(msgSalienteAlmacena(mensaje))
+
+    setSector('')
+    setUsuarios([])
+    setHabilidades([])
   };
 
   return (
@@ -82,20 +76,20 @@ export default function HabilidadAsignar() {
         <Box component="form" onSubmit={enviarInformacion} sx={{ '& > :not(style)': { m: 1, width: '100%' }, }}>
 
             <Typography variant="h5" component="h2" align="center" display="block" color="#666">
-              ASIGNAR HABILIDADES
+              ASIGNAR HABILIDADES A USUARIOS
             </Typography>
 
             <Box sx={{ '& > :not(style)': { width: '100%' }, }} >
               <ThemeProvider theme={darkTheme}>
                 <AppBar position="static" color="primary" sx={{ paddingLeft: '50px', color: '#fff' }}>
-                  Sector
+                  Seleccione el Sector
                 </AppBar>
               </ThemeProvider>
             </Box>
             <Grid container rowSpacing={2} columnSpacing={{ xs: 6, sm: 2, md: 3 }} paddingBottom={1} >
               <Grid item xs={6}>
                 <Box sx={{ '& > :not(style)': { width: '100%' }, }} noValidate autoComplete="off" required>
-                  <SelectSector valor={sector} handleChange={sectorSelecciona} />
+                  <SelectSector valor1={sector} handleChange={sectorSelecciona} />
                 </Box>
               </Grid>
             </Grid>
@@ -103,7 +97,7 @@ export default function HabilidadAsignar() {
             <Box sx={{ '& > :not(style)': { width: '100%' }, }} >
               <ThemeProvider theme={darkTheme}>
                 <AppBar position="static" color="primary" sx={{ paddingLeft: '50px', color: '#fff' }}>
-                  Operador
+                  Seleccione los Usuarios
                 </AppBar>
               </ThemeProvider>
             </Box>

@@ -6,13 +6,12 @@ import TextField from '@mui/material/TextField';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { styled } from '@mui/material/styles';
 import SelectSector from '../componentes/SelectSector';
 import { useDispatch, useSelector } from 'react-redux';
 import { msgSalienteAlmacena } from '../redux/actions';
 import { armoMensajeSaliente } from '../utils/Helpers';
 import { usuarioId, menuColas } from '../redux/selectors';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import LoadingButton from '@mui/lab/LoadingButton';
 import SaveIcon from '@mui/icons-material/Save';
 import InputLabel from '@mui/material/InputLabel';
@@ -27,13 +26,6 @@ const darkTheme = createTheme({
     },
   },
 });
-
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
 
 export default function ColaAgregar() {
   const dispatch = useDispatch()
@@ -58,6 +50,7 @@ export default function ColaAgregar() {
   const cola_ringueo = []
   const cola_espera = []
   const cola_autopausa = []
+  const cola_prioridad = []
 
   let arrayColas = []
   Object.entries(colas).forEach(([key, v]) => {
@@ -82,6 +75,10 @@ export default function ColaAgregar() {
     cola_autopausa.push(h);
   }
 
+  for (let k = 1; k < 99; k++) {
+    cola_prioridad.push(k);
+  }
+
   const manejaCambios = (event) => {
     setColaNueva({
       ...colaNueva,
@@ -94,7 +91,7 @@ export default function ColaAgregar() {
   };
 
   const enviarInformacion = (event) => {
-    event.preventDefault(); 
+    event.preventDefault();
 
     let datosCola = []
     datosCola.push(colaNueva.cola_numero)
@@ -102,7 +99,8 @@ export default function ColaAgregar() {
     datosCola.push(colaNueva.cola_ringueo)
     datosCola.push(colaNueva.cola_espera)
     datosCola.push(colaNueva.cola_autopausa)
-    
+    datosCola.push(colaNueva.cola_prioridad)
+
     const mensaje = armoMensajeSaliente(3001, usuario_id, sector, "", "", "", colaNueva.cola_nombre, "", "", "", "", datosCola)
     dispatch(msgSalienteAlmacena(mensaje))
 
@@ -203,6 +201,21 @@ export default function ColaAgregar() {
                     </Select>
                   </FormControl>
                 </Box>
+
+                <Box sx={{ '& > :not(style)': { width: '100%' }, }} paddingTop={2} noValidate autoComplete="off" required>
+                  <FormControl fullWidth>
+                    <InputLabel id="select-prioridad-label">Prioridad Cola</InputLabel>
+                    <Select labelId="select-prioridad-label" id="cola_prioridad" name="cola_prioridad" value={colaNueva.cola_prioridad ? colaNueva.cola_prioridad : ''} onChange={manejaCambios} label="Prioridad Cola">
+                      <MenuItem value="">
+                        <em></em>
+                      </MenuItem>
+                      {cola_prioridad.map((id) => (
+                        <MenuItem key={id} value={id}>{id}</MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Box>
+
               </Grid>
             </Grid>
 

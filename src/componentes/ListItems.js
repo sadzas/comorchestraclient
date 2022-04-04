@@ -19,7 +19,6 @@ import GroupTwoToneIcon from '@mui/icons-material/GroupTwoTone';
 import GroupAddTwoToneIcon from '@mui/icons-material/GroupAddTwoTone';
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import TableRowsTwoToneIcon from '@mui/icons-material/TableRowsTwoTone';
-import LegendToggleTwoToneIcon from '@mui/icons-material/LegendToggleTwoTone';
 import TocTwoToneIcon from '@mui/icons-material/TocTwoTone';
 import MonitorTwoToneIcon from '@mui/icons-material/MonitorTwoTone';
 import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
@@ -30,6 +29,9 @@ import CalendarViewWeekTwoToneIcon from '@mui/icons-material/CalendarViewWeekTwo
 import WorkspacesTwoToneIcon from '@mui/icons-material/WorkspacesTwoTone';
 import GridViewTwoToneIcon from '@mui/icons-material/GridViewTwoTone';
 import DashboardCustomizeTwoToneIcon from '@mui/icons-material/DashboardCustomizeTwoTone';
+import LegendToggleTwoToneIcon from '@mui/icons-material/LegendToggleTwoTone';
+import FilterNoneTwoToneIcon from '@mui/icons-material/FilterNoneTwoTone';
+import ListAltTwoToneIcon from '@mui/icons-material/ListAltTwoTone';
 import SendIcon from '@mui/icons-material/Send';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
@@ -417,14 +419,14 @@ export default function MainListItems() {
             
             <ListItemButton sx={{ pl: 4 }} component={Link} to="/habilidad_asignar">
               <ListItemIcon>
-                <StarBorder />
+                <LegendToggleTwoToneIcon />
               </ListItemIcon>
               <ListItemText primary="Asignar" />
             </ListItemButton>
 
             <ListItemButton sx={{ pl: 4 }} component={Link} to="/habilidad_agrupar">
               <ListItemIcon>
-                <StarBorder />
+                <WorkspacesTwoToneIcon />
               </ListItemIcon>
               <ListItemText primary="Agrupar" />
             </ListItemButton>
@@ -449,14 +451,14 @@ export default function MainListItems() {
             
             <ListItemButton sx={{ pl: 4 }} component={Link} to="/estado_asignar">
               <ListItemIcon>
-                <StarBorder />
+                <FilterNoneTwoToneIcon />
               </ListItemIcon>
               <ListItemText primary="Asignar" />
             </ListItemButton>
 
             <ListItemButton sx={{ pl: 4 }} component={Link} to="/estado_agrupar">
               <ListItemIcon>
-                <StarBorder />
+                <ListAltTwoToneIcon />
               </ListItemIcon>
               <ListItemText primary="Agrupar" />
             </ListItemButton>

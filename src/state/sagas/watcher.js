@@ -17,6 +17,7 @@ import {
     alertaCambiaFlagMensaje,
     operadorEstadoGeneral,
     operadorCargaEstadoExtension,
+    menuDepartamentos,
     menuSectores,
     menuSectoresHabilidades,
     menuSectoresEstados,
@@ -81,10 +82,20 @@ function getMessage(mensaje) {
             store.dispatch(menuSectoresHabilidades(msg.value29))
             store.dispatch(menuSectoresEstados(msg.value30))
             store.dispatch(menuHabilidadesGrupos(msg.value31))
+            store.dispatch(menuEstadosGrupos(msg.value32))
+            store.dispatch(menuDepartamentos(msg.value33))
             break
         case 2212:
             store.dispatch(msgEntranteAlmacena(msg))
+            store.dispatch(menuColas(msg.value21))
             store.dispatch(menuUsuarios(msg.value22))
+            store.dispatch(menuSectores(msg.value23))
+            store.dispatch(menuEstados(msg.value24))
+            store.dispatch(menuHabilidades(msg.value25))
+            store.dispatch(menuSectoresHabilidades(msg.value29))
+            store.dispatch(menuSectoresEstados(msg.value30))
+            store.dispatch(menuHabilidadesGrupos(msg.value31))
+            store.dispatch(menuEstadosGrupos(msg.value32))
             break
         case 3012:
             store.dispatch(msgEntranteAlmacena(msg))
@@ -96,6 +107,9 @@ function getMessage(mensaje) {
             break
         case 3104:
             store.dispatch(usuarioMenuColaPropiedades(msg.value26))
+            break
+        case 3501:
+            store.dispatch(menuSectores(msg.value23))
             break
         case 4003:
             store.dispatch(usuarioEstados(msg.value14))
@@ -136,8 +150,11 @@ function getMessage(mensaje) {
         case 4601:
             store.dispatch(menuEstados(msg.value24))
             break
+        case 4602:
+            store.dispatch(menuEstadosGrupos(msg.value32))
+            break
         case 4603:
-            
+            break
         case 5001:
             store.dispatch(alertaCambiaFlagTitulo(msg.value6))
             store.dispatch(alertaCambiaFlagMensaje(msg.value7))

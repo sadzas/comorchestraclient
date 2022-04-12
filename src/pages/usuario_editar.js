@@ -17,7 +17,7 @@ import SelectPerfil from '../componentes/SelectPerfil'
 import SelectPermisos from '../componentes/SelectPermisos'
 import LoadingButton from '@mui/lab/LoadingButton';
 import SaveIcon from '@mui/icons-material/Save';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 
 const darkTheme = createTheme({
   palette: {
@@ -38,12 +38,11 @@ export default function UsuarioEditar() {
   const [blockPermisos, setBlockpermisos] = useState(true)
   const menu_usuarios = useSelector(menuUsuarios)
   const usuario_id = useSelector(usuarioId)
-  let usuario_nombre = useRef(null);
-  let usuario_apellido = useRef(null);
-  let usuario_correo = useRef(null);
-  let usuario_usuario = useRef(null);
+  let sectoresArr = []
 
   const usuarioSelecciona = (event) => {
+    permisosLocales(menu_usuarios[event.target.value].id_perfil)
+
     setUsuario(event.target.value)
     setUsuarioNuevo(menu_usuarios[event.target.value])
     setPerfil(menu_usuarios[event.target.value].id_perfil)
@@ -51,26 +50,33 @@ export default function UsuarioEditar() {
     setPermisos(menu_usuarios[event.target.value].usuario_permisos_supervision)
   };
 
+  function permisosLocales(id_perfil) {
+    switch (id_perfil) {
+      case 1:
+        setBlocksectores(true)
+        setBlockpermisos(true)
+        setPermisos([])
+        setSectores([])
+        break
+      case 2:
+        setBlocksectores(false)
+        setBlockpermisos(false)
+        setSectores([])
+        setPermisos([])
+        break
+      case 3:
+        setBlocksectores(false)
+        setBlockpermisos(true)
+        setPermisos([])
+        setSectores([])
+        break
+      default:
+        break
+    }
+  }
+
   const perfilSelecciona = (event) => {
-    setPerfil(event.target.value)
-    if (event.target.value === 1) {
-      setPermisos([])
-      setSectores([])
-      setBlocksectores(true)
-      setBlockpermisos(true)
-    }
-    if (event.target.value === 2) {
-      setSectores([])
-      setPermisos([])
-      setBlocksectores(false)
-      setBlockpermisos(false)
-    }
-    if (event.target.value === 3) {
-      setPermisos([])
-      setSectores([])
-      setBlocksectores(false)
-      setBlockpermisos(true)
-    }
+    permisosLocales(event.target.value)
   };
 
   const handleChange = (event) => {
@@ -103,22 +109,22 @@ export default function UsuarioEditar() {
   const enviarInformacion = (event) => {
     event.preventDefault();
 
-    let tempArraySector = []
-    if (perfil === 3) {
-      tempArraySector.push(sectores)
+    if (!Array.isArray(sectores)) {
+      sectoresArr.push(sectores);
     } else {
-      tempArraySector = sectores
+      sectoresArr = sectores;
     }
-
-    const mensaje = armoMensajeSaliente(2202, usuario_id, perfil, "", "", usuario, usuarioNuevo.usuario_nombre, usuarioNuevo.usuario_apellido, usuarioNuevo.usuario_correo, usuarioNuevo.usuario_usuario, "", tempArraySector, permisos)
-    dispatch(msgSalienteAlmacena(mensaje))
     
+    const mensaje = armoMensajeSaliente(2202, usuario_id, perfil, "", "", usuario, usuarioNuevo.usuario_nombre, usuarioNuevo.usuario_apellido, usuarioNuevo.usuario_correo, usuarioNuevo.usuario_usuario, "", sectoresArr, permisos)
+    dispatch(msgSalienteAlmacena(mensaje))
+
+    setUsuario('')
     setPerfil('')
     setSectores([])
     setPermisos([])
     setUsuarioNuevo([])
   };
-  if (perfil == 3) {
+  if (perfil === 3) {
 
     return (
       <Grid container spacing={20}>

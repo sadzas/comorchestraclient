@@ -7,17 +7,6 @@ import { useSelector } from 'react-redux';
 import { menuColas } from '../redux/selectors';
 import { useState, useEffect } from 'react';
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-    PaperProps: {
-        style: {
-            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-            width: 250,
-        },
-    },
-};
-
 export default function SelectCola(props) {
     const menu_colas = useSelector(menuColas)
     const [lcolas, setLcolas] = useState(menu_colas);

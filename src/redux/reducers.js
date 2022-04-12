@@ -20,6 +20,7 @@ import {
     REDUX_OPERADOR_ESTADO_GENERAL,
     REDUX_OPERADOR_ESTADO_EXTENSION,
     REDUX_OPERADOR_ESTADO_CHAT_GENERAL,
+    REDUX_MENU_DEPARTAMENTOS,
     REDUX_MENU_SECTORES,
     REDUX_MENU_SECTORES_HABILIDADES,
     REDUX_MENU_SECTORES_ESTADOS,
@@ -158,7 +159,10 @@ export const reducer = (state, action) => {
             return {
                 ...state, operador_estado_chat_general: action.mensaje
             }
-
+        case REDUX_MENU_DEPARTAMENTOS:
+            return {
+                ...state, menu_departamentos: action.mensaje
+            }
         case REDUX_MENU_SECTORES:
             return {
                 ...state, menu_sectores: action.mensaje

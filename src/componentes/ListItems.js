@@ -281,12 +281,6 @@ export default function MainListItems() {
               </ListItemIcon>
               <ListItemText primary="Agregar" />
             </ListItemButton>
-            <ListItemButton sx={{ pl: 4 }} component={Link} to="/sector_editar">
-              <ListItemIcon>
-                <EditTwoToneIcon />
-              </ListItemIcon>
-              <ListItemText primary="Editar" />
-            </ListItemButton>
           </List>
         </Collapse>
         {/*
@@ -442,11 +436,19 @@ export default function MainListItems() {
         </ListItemButton>
         <Collapse sx={{ display: sxEstados }} in={estados} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
+
             <ListItemButton sx={{ pl: 4 }} component={Link} to="/estado_agregar">
               <ListItemIcon>
                 <AddCircleTwoToneIcon />
               </ListItemIcon>
               <ListItemText primary="Agregar" />
+            </ListItemButton>
+
+            <ListItemButton sx={{ pl: 4 }} component={Link} to="/estado_editar">
+              <ListItemIcon>
+                <EditTwoToneIcon />
+              </ListItemIcon>
+              <ListItemText primary="Editar" />
             </ListItemButton>
             
             <ListItemButton sx={{ pl: 4 }} component={Link} to="/estado_asignar">

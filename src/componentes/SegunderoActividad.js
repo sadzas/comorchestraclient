@@ -20,13 +20,13 @@ export default function Segundero(props) {
     }
 
     function limpiaContador(id) {
-        const tt = localStorage.getItem(id);
+        const tt = localStorage.getItem(id+'actividad');
         clearInterval(tt)
     }
 
     function iniciaContador(id, tiempoImpacto) {
 
-        clearInterval(operador[id])
+        clearInterval(operador[id+'actividad'])
         operador = setInterval(function () {
 
 
@@ -40,7 +40,7 @@ export default function Segundero(props) {
 
             setTiempo(convierteTimeStamp(tiempoImpacto));
         }, 1000);
-        localStorage.setItem(id, operador)
+        localStorage.setItem(id+'actividad', operador)
     }
 
     limpiaContador(props.valor1.row.id_usuario)

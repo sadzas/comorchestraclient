@@ -28,6 +28,7 @@ export const menuEstadosGrupos = state => state.menu_estados_grupos
 export const menuColas = state => state.menu_colas
 export const menuColasEstrategias = state => state.menu_colas_estrategias
 export const menuPermisos = state => state.menu_permisos
+export const menuDepartamentos = state => state.menu_departamentos
 export const menuSectores = state => state.menu_sectores
 export const menuSectoresHabilidades = state => state.menu_sectores_habilidades
 export const menuSectoresEstados = state => state.menu_sectores_estados

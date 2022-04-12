@@ -48,6 +48,7 @@ export const store = createStore(
         menu_usuarios: [],
         menu_permisos: [],
         menu_sectores: [],
+        menu_departamentos: [],
         menu_sectores_habilidades: [],
         menu_sectores_estados: [],
         realtime_usuarios: [],

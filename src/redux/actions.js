@@ -16,6 +16,7 @@ import {
   REDUX_OPERADOR_ESTADO_EXTENSION,
   REDUX_OPERADOR_ESTADO_CHAT_GENERAL,
 
+  REDUX_MENU_DEPARTAMENTOS,
   REDUX_MENU_SECTORES,
   REDUX_MENU_SECTORES_HABILIDADES,
   REDUX_MENU_SECTORES_ESTADOS,
@@ -206,6 +207,12 @@ export const menuUsuarios = (mensaje) => {
 export const menuPermisos = (mensaje) => {
   return {
     type: REDUX_MENU_PERMISOS,
+    mensaje
+  }
+}
+export const menuDepartamentos = (mensaje) => {
+  return {
+    type: REDUX_MENU_DEPARTAMENTOS,
     mensaje
   }
 }

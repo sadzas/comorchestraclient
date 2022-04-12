@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
@@ -22,7 +22,6 @@ import Orders from './Orders'
 import UsuarioAgregar from './usuario_agregar'
 import UsuarioEditar from './usuario_editar'
 import SectorAgregar from './sector_agregar'
-import SectorEditar from './sector_editar'
 import ColaAgregar from './cola_agregar'
 import ColaEditar from './cola_editar'
 import ColaPropiedades from './cola_propiedades'
@@ -36,7 +35,7 @@ import UsuarioEstados from './usuario_estados'
 import EstadoAgregar from './estado_agregar'
 import EstadoAgrupar from './estado_agrupar'
 import EstadoAsignar from './estado_asignar'
-import EstadoModificar from './estado_modificar'
+import EstadoEditar from './estado_editar'
 import GrupoHabilidades from './grupo_habilidades'
 import GrupoEstados from './grupo_estados'
 import Grid from '@mui/material/Grid';
@@ -169,7 +168,6 @@ export default function Board({ children }) {
               <Route path="/usuario_agregar" component={UsuarioAgregar} />
               <Route path="/usuario_editar" component={UsuarioEditar} />
               <Route path="/sector_agregar" component={SectorAgregar} />
-              <Route path="/sector_editar" component={SectorEditar} />
               <Route path="/cola_agregar" component={ColaAgregar} />
               <Route path="/cola_editar" component={ColaEditar} />
               <Route path="/habilidad_agregar" component={HabilidadAgregar} />
@@ -179,11 +177,11 @@ export default function Board({ children }) {
               <Route path="/usuario_habilidades" component={UsuarioHabilidades} />
               <Route path="/usuario_estados" component={UsuarioEstados} />
               <Route path="/estado_agregar" component={EstadoAgregar} />
+              <Route path="/estado_editar" component={EstadoEditar} />
               <Route path="/estado_agrupar" component={EstadoAgrupar} />
               <Route path="/estado_asignar" component={EstadoAsignar} />
               <Route path="/cola_propiedades" component={ColaPropiedades} />
               <Route path="/cola_habilidades" component={ColaHabilidades} />
-              <Route path="/estado_modificar" component={EstadoModificar} />
               <Route path="/grupo_habilidades" component={GrupoHabilidades} />
               <Route path="/grupo_estados" component={GrupoEstados} />
               <Route path="/orders" component={Orders} />

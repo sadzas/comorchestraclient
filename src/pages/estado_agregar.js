@@ -25,7 +25,7 @@ const darkTheme = createTheme({
   },
 });
 
-export default function UsuarioNuevo() {
+export default function EstadoAgregar() {
   const dispatch = useDispatch()
 
   const [sector, setSector] = useState('');

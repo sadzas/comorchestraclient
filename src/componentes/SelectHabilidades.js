@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { menuHabilidades, menuSectoresHabilidades } from '../redux/selectors';
-import Slider, { SliderThumb } from '@mui/material/Slider';
+import Slider from '@mui/material/Slider';
 import Typography from '@mui/material/Typography';
 
 export default function SelectHabilidades(props) {

@@ -35,6 +35,7 @@ export default function UsuarioAgregar() {
   const [blockSectores, setBlocksectores] = useState(true)
   const [blockPermisos, setBlockpermisos] = useState(true)
   const usuario_id = useSelector(usuarioId)
+  let sectoresArr = []
 
   const perfilSelecciona = (event) => {
     setPerfil(event.target.value)
@@ -87,14 +88,14 @@ export default function UsuarioAgregar() {
 
   const enviarInformacion = (event) => {
     event.preventDefault();
-    let tempArraySector = []
-    if (perfil === 3) {
-      tempArraySector.push(sectores)
+
+    if (!Array.isArray(sectores)) {
+      sectoresArr.push(sectores);
     } else {
-      tempArraySector = sectores
+      sectoresArr = sectores;
     }
 
-    const mensaje = armoMensajeSaliente(2201, usuario_id, perfil, "", "", "", usuarioNuevo.usuario_nombre, usuarioNuevo.usuario_apellido, usuarioNuevo.usuario_correo, usuarioNuevo.usuario_usuario, "", tempArraySector, permisos)
+    const mensaje = armoMensajeSaliente(2201, usuario_id, perfil, "", "", "", usuarioNuevo.usuario_nombre, usuarioNuevo.usuario_apellido, usuarioNuevo.usuario_correo, usuarioNuevo.usuario_usuario, "", sectoresArr, permisos)
     dispatch(msgSalienteAlmacena(mensaje))
     
     setPerfil('')

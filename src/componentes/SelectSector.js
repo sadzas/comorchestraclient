@@ -8,17 +8,6 @@ import { useSelector } from 'react-redux';
 import { menuSectores } from '../redux/selectors';
 import { useState, useEffect } from 'react';
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-    PaperProps: {
-        style: {
-            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-            width: 250,
-        },
-    },
-};
-
 export default function SelectSector(props) {
     const menu_sectores = useSelector(menuSectores)
     const [sectores, setSectores] = useState(menu_sectores);

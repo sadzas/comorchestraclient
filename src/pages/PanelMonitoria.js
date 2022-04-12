@@ -3,30 +3,64 @@ import { DataGrid } from '@mui/x-data-grid';
 import { useSelector } from 'react-redux';
 import { realtimeUsuarios } from '../redux/selectors';
 import { useState, useEffect } from 'react';
-import Segundero from '../componentes/Segundero'
+import SegunderoActividad from '../componentes/SegunderoActividad'
+import SegunderoEstado from '../componentes/SegunderoEstado'
+import HabilidadesRT from '../componentes/HabilidadesRT'
+import EstadoRT from '../componentes/EstadoRT'
 
 const columns = [
     {
-        field: 'id_usuario',
-        headerName: 'id_usuario',
+        field: 'usuario_usuario',
+        headerName: 'Usuario',
         width: 100,
     },
     {
-        field: 'usuario_nombre',
-        headerName: 'usuario_nombre',
-        width: 100,
-    },
-    {
-        field: 'usuario_apellido',
-        headerName: 'usuario_apellido',
-        width: 100,
-    },
-    {
-        field: 'usuario_estado_impacto',
-        headerName: 'usuario_estado_impacto',
+        field: 'Nombre',
+        headerName: 'Nombre',
+        description: 'This column has a value getter and is not sortable.',
+        sortable: false,
         width: 200,
+        valueGetter: (params) =>
+            `${params.row.usuario_apellido || ''} ${params.row.usuario_nombre || ''}`,
+    },
+    {
+        field: 'id_usuario',
+        headerName: 'Habilidades',
+        width: 100,
         renderCell: (params) => (
-            <Segundero valor1={params} />
+            <HabilidadesRT valor1={params} />
+        ),
+    },
+    {
+        field: 'estado',
+        headerName: 'Estado',
+        width: 80,
+        renderCell: (params) => (
+            <EstadoRT valor1={params} />
+        ),
+    },
+    {
+        field: 'tiempo_estado',
+        headerName: 'Tiempo Estado',
+        width: 120,
+        renderCell: (params) => (
+            <SegunderoEstado valor1={params} />
+        ),
+    },
+    {
+        field: 'actividad',
+        headerName: 'Actividad',
+        width: 80,
+        renderCell: (params) => (
+            <EstadoRT valor1={params} />
+        ),
+    },
+    {
+        field: 'tiempo_actividad',
+        headerName: 'Tiempo Actividad',
+        width: 120,
+        renderCell: (params) => (
+            <SegunderoActividad valor1={params} />
         ),
     },
 ];
@@ -38,7 +72,7 @@ export default function PanelMonitoria() {
     useEffect(() => {
         setRealtime(operadores_realtime)
     }, [operadores_realtime]);
-    
+
     return (
         <div style={{ height: 400, width: '100%' }}>
             <DataGrid

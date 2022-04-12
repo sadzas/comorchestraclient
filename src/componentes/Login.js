@@ -12,8 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useDispatch, useSelector } from 'react-redux';
-import { wsEstadoSesion } from '../redux/selectors';
+import { useDispatch } from 'react-redux';
 import { msgSalienteAlmacena } from '../redux/actions';
 import { armoMensajeSaliente } from '../utils/Helpers';
 
@@ -35,7 +34,7 @@ const theme = createTheme();
 export default function SignIn() {
 
     const dispatch = useDispatch()
-    const estadoSesion = useSelector(wsEstadoSesion)
+    //const estadoSesion = useSelector(wsEstadoSesion)
 
     const handleSubmit = (event) => {
         event.preventDefault();

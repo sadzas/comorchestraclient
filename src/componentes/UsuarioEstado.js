@@ -8,7 +8,7 @@ import { operadorEstadoGeneral, usuarioId, operadorEstadoExtension } from '../re
 import { useDispatch, useSelector } from 'react-redux';
 import { msgSalienteAlmacena } from '../redux/actions';
 import { armoMensajeSaliente } from '../utils/Helpers';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 
 export default function UsuarioEstado() {

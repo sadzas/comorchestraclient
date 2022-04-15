@@ -25,7 +25,7 @@ export default function SelectEstadoUsuario(props) {
                 <Select
                     labelId="select-estado-usuario"
                     id="select-estado-usuario"
-                    value={props.value}
+                    value={props.valor1}
                     label="Estado"
                     onChange={props.handleChange}
                     >

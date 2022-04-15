@@ -12,11 +12,15 @@ const columns = [
     {
         field: 'usuario_usuario',
         headerName: 'Usuario',
+        headerAlign:"center",
+        align:'center',
         width: 100,
     },
     {
         field: 'Nombre',
         headerName: 'Nombre',
+        headerAlign:"center",
+        align:'center',
         description: 'This column has a value getter and is not sortable.',
         sortable: false,
         width: 200,
@@ -26,6 +30,8 @@ const columns = [
     {
         field: 'id_usuario',
         headerName: 'Habilidades',
+        headerAlign:"center",
+        align:'center',
         width: 100,
         renderCell: (params) => (
             <HabilidadesRT valor1={params} />
@@ -34,7 +40,9 @@ const columns = [
     {
         field: 'estado',
         headerName: 'Estado',
-        width: 80,
+        headerAlign:"center",
+        align:'center',
+        width: 120,
         renderCell: (params) => (
             <EstadoRT valor1={params} />
         ),
@@ -42,6 +50,8 @@ const columns = [
     {
         field: 'tiempo_estado',
         headerName: 'Tiempo Estado',
+        headerAlign:"center",
+        align:'center',
         width: 120,
         renderCell: (params) => (
             <SegunderoEstado valor1={params} />
@@ -50,6 +60,8 @@ const columns = [
     {
         field: 'actividad',
         headerName: 'Actividad',
+        headerAlign:"center",
+        align:'center',
         width: 80,
         renderCell: (params) => (
             <EstadoRT valor1={params} />
@@ -58,6 +70,8 @@ const columns = [
     {
         field: 'tiempo_actividad',
         headerName: 'Tiempo Actividad',
+        headerAlign:"center",
+        align:'center',
         width: 120,
         renderCell: (params) => (
             <SegunderoActividad valor1={params} />

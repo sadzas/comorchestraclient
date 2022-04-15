@@ -6,27 +6,30 @@ import Grid from '@mui/material/Grid';
 import SelectEstadoUsuario from '../componentes/SelectEstadoUsuario'
 import { operadorEstadoGeneral, usuarioId, operadorEstadoExtension } from '../redux/selectors';
 import { useDispatch, useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
 import { msgSalienteAlmacena } from '../redux/actions';
 import { armoMensajeSaliente } from '../utils/Helpers';
-import { useState } from 'react';
-
 
 export default function UsuarioEstado() {
     const dispatch = useDispatch()
     const operador_estado_general = useSelector(operadorEstadoGeneral);
-    const [estado, setEstado] = useState(operador_estado_general);
-    const usuario_id = useSelector(usuarioId);
     const operador_estado_extension = useSelector(operadorEstadoExtension);
+    const [estado, setEstado] = useState('')
+    const usuario_id = useSelector(usuarioId);
+    
     let usuarioColor = "default";
     let extensionColor = "default";
     let chatColor = "default";
 
     const estadoUsuarioSelecciona = (event) => {
         event.preventDefault();
-        setEstado(event.target.value)
         const mensaje = armoMensajeSaliente(2002, usuario_id, event.target.value)
         dispatch(msgSalienteAlmacena(mensaje))
     };
+
+    useEffect(() => {
+        setEstado(operador_estado_general)
+    }, [operador_estado_general]);
 
     switch (estado) {
         case 1:
@@ -51,7 +54,7 @@ export default function UsuarioEstado() {
             <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={3} alignItems="center" >
                     <Grid item xs={4} alignItems="center">
-                        <SelectEstadoUsuario value={estado} handleChange={estadoUsuarioSelecciona} />
+                        <SelectEstadoUsuario valor1={estado} handleChange={estadoUsuarioSelecciona} />
                     </Grid>
                     <Grid item xs={6} alignItems="center">
                         <Grid container spacing={1} columns={12} >

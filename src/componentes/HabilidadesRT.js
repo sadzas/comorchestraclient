@@ -111,7 +111,7 @@ export default function HabilidadesRT(props) {
 
     return (
         <div>
-            <Button variant="outlined" onClick={handleClickOpen}>
+            <Button variant="text" size="small" onClick={handleClickOpen}>
                 Ver
             </Button>
             <BootstrapDialog

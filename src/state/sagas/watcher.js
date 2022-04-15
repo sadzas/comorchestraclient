@@ -47,6 +47,12 @@ function getMessage(mensaje) {
     let msg = JSON.parse(mensaje.payload.message)
     console.log("El mensaje entrante es: ", msg)
     switch (msg.code) {
+        case 2002:
+            console.log("Llega el estado del usuario: ",msg.value2)
+            store.dispatch(msgEntranteAlmacena(msg))
+            store.dispatch(operadorEstadoGeneral(msg.value2))
+            break
+
         case 2201:
             //store.dispatch(msgEntranteAlmacena(msg))
             store.dispatch(alertaCambiaFlagTitulo(msg.value6))
@@ -115,31 +121,6 @@ function getMessage(mensaje) {
             store.dispatch(usuarioEstados(msg.value14))
             break
         // 4101: Se envian los datos de: Gerencia => Departamento => Sector de acuerdo al perfil obtenido.
-        case 4101:
-            store.dispatch(menuSectores(msg.value20))
-            store.dispatch(menuPermisos(msg.value21))
-            break
-        case 4103:
-            store.dispatch(menuUsuarios(msg.value20))
-            store.dispatch(menuPermisos(msg.value21))
-            break
-        case 4104:
-            //store.dispatch(menuOperadores(msg.value20))
-            //store.dispatch(menuHabilidades(msg.value21))
-            break
-        case 4105:
-            store.dispatch(menuUsuarios(msg.value20))
-            store.dispatch(menuEstados(msg.value21))
-            break
-        case 4106:
-            //store.dispatch(menuHabilidadesUsuario(msg.value21))
-            break
-        case 4107:
-            //store.dispatch(menuPermisosUsuario(msg.value11))
-            break
-        case 4108:
-            store.dispatch(menuEstadosUsuario(msg.value11))
-            break
         case 4401:
             store.dispatch(menuHabilidades(msg.value25))
             store.dispatch(menuSectoresHabilidades(msg.value29))
@@ -154,6 +135,7 @@ function getMessage(mensaje) {
             store.dispatch(menuEstadosGrupos(msg.value32))
             break
         case 4603:
+            store.dispatch(menuUsuarios(msg.value22))
             break
         case 5001:
             store.dispatch(alertaCambiaFlagTitulo(msg.value6))

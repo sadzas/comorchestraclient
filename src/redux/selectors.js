@@ -7,9 +7,10 @@ export const usuarioId = state => state.usuario_id
 export const usuarioPerfil = state => state.usuario_perfil
 export const usuarioUsuario = state => state.usuario_usuario
 
-export const operadorEstadoGeneral = state => state.operador_estado_general
-export const operadorEstadoExtension = state => state.operador_estado_extension
-export const operadorEstadoChatGeneral = state => state.operador_estado_chat_general
+export const usuarioEstadoOperador = state => state.usuario_estado_operador
+export const usuarioEstadoExtension = state => state.usuario_estado_extension
+export const usuarioEstadoChat = state => state.usuario_estado_chat
+
 export const operadorExtensionUS = state => state.operador_extension_US
 export const operadorExtensionUA = state => state.operador_extension_UA
 export const operadorExtensionPW = state => state.operador_extension_PW

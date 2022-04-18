@@ -17,9 +17,9 @@ import {
     REDUX_USUARIO_SUPERVISION,
     REDUX_USUARIO_ADMINISTRACION,
     REDUX_USUARIO_ESTADOS,
-    REDUX_OPERADOR_ESTADO_GENERAL,
-    REDUX_OPERADOR_ESTADO_EXTENSION,
-    REDUX_OPERADOR_ESTADO_CHAT_GENERAL,
+    REDUX_USUARIO_ESTADO_OPERADOR,
+    REDUX_USUARIO_ESTADO_EXTENSION,
+    REDUX_USUARIO_ESTADO_CHAT,
     REDUX_MENU_DEPARTAMENTOS,
     REDUX_MENU_SECTORES,
     REDUX_MENU_SECTORES_HABILIDADES,
@@ -145,19 +145,19 @@ export const reducer = (state, action) => {
                 ...state, usuario_estados: action.mensaje
             }
 
-        case REDUX_OPERADOR_ESTADO_GENERAL:
+        case REDUX_USUARIO_ESTADO_OPERADOR:
             return {
-                ...state, operador_estado_general: action.mensaje
+                ...state, usuario_estado_operador: action.mensaje
             }
 
-        case REDUX_OPERADOR_ESTADO_EXTENSION:
+        case REDUX_USUARIO_ESTADO_EXTENSION:
             return {
-                ...state, operador_estado_extension: action.mensaje
+                ...state, usuario_estado_extension: action.mensaje
             }
 
-        case REDUX_OPERADOR_ESTADO_CHAT_GENERAL:
+        case REDUX_USUARIO_ESTADO_CHAT:
             return {
-                ...state, operador_estado_chat_general: action.mensaje
+                ...state, usuario_estado_chat: action.mensaje
             }
         case REDUX_MENU_DEPARTAMENTOS:
             return {

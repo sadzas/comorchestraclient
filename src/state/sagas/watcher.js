@@ -15,8 +15,11 @@ import {
     alertaCambiaFlagEstado,
     alertaCambiaFlagTitulo,
     alertaCambiaFlagMensaje,
-    operadorEstadoGeneral,
-    operadorCargaEstadoExtension,
+    
+    usuarioEstadoOperador,
+    usuarioEstadoExtension,
+    usuarioEstadoChat,
+
     menuDepartamentos,
     menuSectores,
     menuSectoresHabilidades,
@@ -50,7 +53,7 @@ function getMessage(mensaje) {
         case 2002:
             console.log("Llega el estado del usuario: ",msg.value2)
             store.dispatch(msgEntranteAlmacena(msg))
-            store.dispatch(operadorEstadoGeneral(msg.value2))
+            store.dispatch(usuarioEstadoOperador(msg.value2))
             break
 
         case 2201:
@@ -67,14 +70,14 @@ function getMessage(mensaje) {
             store.dispatch(usuarioPermisosSupervision(msg.value12))
             store.dispatch(usuarioPermisosAdministracion(msg.value13))
             store.dispatch(usuarioEstados(msg.value14))
-            store.dispatch(operadorEstadoGeneral(msg.value2))
+            store.dispatch(usuarioEstadoOperador(msg.value2))
 
             store.dispatch(msgEntranteEstado())
             break
         // 2102: Cambia estado general del operador
         case 2102:
             //store.dispatch(msgEntranteAlmacena(msg))
-            store.dispatch(operadorEstadoGeneral(msg.value2))
+            store.dispatch(usuarioEstadoOperador(msg.value2))
             break
         // 2111: El usuario es Admin / Supervisor. Se envian datos del menu
         case 2111:
@@ -145,7 +148,7 @@ function getMessage(mensaje) {
         // 5101: Se envia el cambio de estado de la Extension.
         case 5101:
             //store.dispatch(msgEntranteAlmacena(msg))
-            store.dispatch(operadorCargaEstadoExtension(msg.value7))
+            store.dispatch(usuarioEstadoExtension(msg.value7))
             break
         case 5555:
             //store.dispatch(msgEntranteAlmacena(msg))

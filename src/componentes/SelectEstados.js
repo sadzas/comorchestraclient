@@ -22,26 +22,26 @@ const MenuProps = {
 export default function SelectEstados(props) {
     const menu_estados = useSelector(menuEstados)
     const menu_sectores_estados = useSelector(menuSectoresEstados)
-    const [lestados, setLestados] = useState(menu_estados);
-    const [lsestados, setLsestados] = useState(menu_sectores_estados);
+    const [estados, setEstados] = useState(menu_estados);
+    const [secEstados, setSecEstados] = useState(menu_sectores_estados);
+    let imprime_estados = []
 
     useEffect(() => {
-        setLestados(
+        setEstados(
             menu_estados
         );
     }, [menu_estados]);
 
     useEffect(() => {
-        setLsestados(
+        setSecEstados(
             menu_sectores_estados
         );
     }, [menu_sectores_estados]);
-
-    let estados = []
-    Object.entries(lestados).forEach(([key, v]) => {
-        if (lsestados[props.valor1] !== undefined) {
-            if (lsestados[props.valor1].includes(Math.floor(key))) {
-                estados.push({ id: key, value: v });
+    
+    Object.entries(estados).forEach(([key, v]) => {
+        if (secEstados[props.valor1] !== undefined) {
+            if (secEstados[props.valor1].includes(Math.floor(key)) && Math.floor(key) != 1) {
+                imprime_estados.push({ id: key, value: v });
             }
         }
     });
@@ -59,7 +59,7 @@ export default function SelectEstados(props) {
                     input={<OutlinedInput label="Estados" />}
                     MenuProps={MenuProps}
                 >
-                    {estados.map((estado) => (
+                    {imprime_estados.map((estado) => (
                         <MenuItem key={estado.id} value={parseInt(estado.id)} >{estado.value}
                         </MenuItem>
                     ))}

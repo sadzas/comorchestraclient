@@ -6,7 +6,7 @@ export default function SegunderoEstado(props) {
     let operador = []
     let fecha = 0
     let id_almacena = props.valor1.row.id_usuario + 'estado'
-    let estado_impacto = props.valor1.row.usuario_estado_impacto
+    let estado_impacto = props.valor1.row.usuario_estadoOperador_impacto
     const [tiempo, setTiempo] = useState('');
     const [tipo, setTipo] = useState('success')
 

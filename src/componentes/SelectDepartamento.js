@@ -11,14 +11,14 @@ import { useState, useEffect } from 'react';
 export default function SelectDepartamento(props) {
     const menu_departamentos = useSelector(menuDepartamentos)
     const [departamentos, setDepartamentos] = useState(menu_departamentos);
+    let imprime_departamentos = []
 
     useEffect(() => {
         setDepartamentos(
             menu_departamentos
         );
     }, [menu_departamentos]);
-
-    let imprime_departamentos = []
+    
     Object.entries(departamentos).forEach(([key, v]) => {
         imprime_departamentos.push({ id: key, value: v });
     });

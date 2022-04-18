@@ -22,7 +22,7 @@ export default function EstadoRT(props) {
     const [estadoNombre, setEstadoNombre] = useState('')
 
     let id_usuario = props.valor1.row.id_usuario
-    let id_estado = menu_usuarios[id_usuario].operador_estado_general
+    let id_estado = menu_usuarios[id_usuario].usuario_estadoOperador
 
     useEffect(() => {
         setEstadoNombre(menu_estados[id_estado])

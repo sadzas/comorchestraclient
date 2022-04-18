@@ -5,7 +5,6 @@ import Typography from '@mui/material/Typography';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { styled } from '@mui/material/styles';
 import SelectHabilidades from '../componentes/SelectHabilidades'
 import SelectUsuariosSectorGrupoHabilidad from '../componentes/SelectUsuariosSectorGrupoHabilidad'
 import SelectGrupoHabilidadesSector from '../componentes/SelectGrupoHabilidadesSector'
@@ -26,13 +25,6 @@ const darkTheme = createTheme({
   },
 });
 
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
-
 export default function GrupoHabilidades() {
   const dispatch = useDispatch()
   const [grupo, setGrupo] = useState([]);
@@ -40,7 +32,6 @@ export default function GrupoHabilidades() {
   const [usuarios, setUsuarios] = useState([]);
   const [habilidades, setHabilidades] = useState([]);
   const usuario_id = useSelector(usuarioId)
-  const menu_usuarios = useSelector(menuUsuarios)
   const menu_habilidades_grupos = useSelector(menuHabilidadesGrupos)
   let blockHabilidades = false
 
@@ -73,7 +64,6 @@ export default function GrupoHabilidades() {
 
   const enviarInformacion = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
 
     let parseo = []
     Object.entries(habilidades).forEach(([key, v]) => {

@@ -12,9 +12,9 @@ import {
   REDUX_USUARIO_ADMINISTRACION,
   REDUX_USUARIO_ESTADOS,
   
-  REDUX_OPERADOR_ESTADO_GENERAL,
-  REDUX_OPERADOR_ESTADO_EXTENSION,
-  REDUX_OPERADOR_ESTADO_CHAT_GENERAL,
+  REDUX_USUARIO_ESTADO_OPERADOR,
+  REDUX_USUARIO_ESTADO_EXTENSION,
+  REDUX_USUARIO_ESTADO_CHAT,
 
   REDUX_MENU_DEPARTAMENTOS,
   REDUX_MENU_SECTORES,
@@ -119,23 +119,23 @@ export const usuarioEstados = (mensaje) => {
   }
 }
 
-export const operadorEstadoGeneral = (mensaje) => {
+export const usuarioEstadoOperador = (mensaje) => {
   return {
-    type: REDUX_OPERADOR_ESTADO_GENERAL,
+    type: REDUX_USUARIO_ESTADO_OPERADOR,
     mensaje
   }
 }
 
-export const operadorCargaEstadoExtension = (mensaje) => {
+export const usuarioEstadoExtension = (mensaje) => {
   return {
-    type: REDUX_OPERADOR_ESTADO_EXTENSION,
+    type: REDUX_USUARIO_ESTADO_EXTENSION,
     mensaje
   }
 }
 
-export const operadorCargaEstadoChatGeneral = (mensaje) => {
+export const usuarioEstadoChat = (mensaje) => {
   return {
-    type: REDUX_OPERADOR_ESTADO_CHAT_GENERAL,
+    type: REDUX_USUARIO_ESTADO_CHAT,
     mensaje
   }
 }

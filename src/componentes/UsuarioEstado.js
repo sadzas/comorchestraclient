@@ -4,7 +4,7 @@ import Chip from '@mui/material/Chip';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import SelectEstadoUsuario from '../componentes/SelectEstadoUsuario'
-import { operadorEstadoGeneral, usuarioId, operadorEstadoExtension } from '../redux/selectors';
+import { usuarioEstadoOperador, usuarioId, usuarioEstadoExtension } from '../redux/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { msgSalienteAlmacena } from '../redux/actions';
@@ -12,8 +12,8 @@ import { armoMensajeSaliente } from '../utils/Helpers';
 
 export default function UsuarioEstado() {
     const dispatch = useDispatch()
-    const operador_estado_general = useSelector(operadorEstadoGeneral);
-    const operador_estado_extension = useSelector(operadorEstadoExtension);
+    const usuario_estado_operador = useSelector(usuarioEstadoOperador);
+    const usuario_estado_extension = useSelector(usuarioEstadoExtension);
     const [estado, setEstado] = useState('')
     const usuario_id = useSelector(usuarioId);
     
@@ -28,8 +28,8 @@ export default function UsuarioEstado() {
     };
 
     useEffect(() => {
-        setEstado(operador_estado_general)
-    }, [operador_estado_general]);
+        setEstado(usuario_estado_operador)
+    }, [usuario_estado_operador]);
 
     switch (estado) {
         case 1:
@@ -40,7 +40,7 @@ export default function UsuarioEstado() {
             break
     }
 
-    switch (operador_estado_extension) {
+    switch (usuario_estado_extension) {
         case "1":
             extensionColor = "success"
             break

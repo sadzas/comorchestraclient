@@ -24,9 +24,8 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 import TextField from '@mui/material/TextField';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { operadorCargaEstadoExtension } from '../redux/actions';
 import { alertaCambiaFlagEstado, alertaCambiaFlagMensaje, alertaCambiaFlagTitulo } from '../redux/actions'
-import { usuarioUsuario, operadorEstadoExtension, operadorExtensionUS, operadorExtensionUA, operadorExtensionPW, operadorExtensionSV } from '../redux/selectors';
+import { usuarioUsuario, usuarioEstadoExtension, operadorExtensionUS, operadorExtensionUA, operadorExtensionPW, operadorExtensionSV } from '../redux/selectors';
 import { msgSalienteAlmacena } from '../redux/actions';
 import { armoMensajeSaliente } from '../utils/Helpers';
 
@@ -72,7 +71,7 @@ export default function SipPhone() {
 
   const dispatch = useDispatch()
   const [display, setDisplay] = useState("")
-  const operador_estado_extension = useSelector(operadorEstadoExtension);
+  const usuario_estado_extension = useSelector(usuarioEstadoExtension);
   const usuario_usuario = useSelector(usuarioUsuario);
   const operador_extension_US = useSelector(operadorExtensionUS);
   const operador_extension_UA = useSelector(operadorExtensionUA);
@@ -302,7 +301,7 @@ export default function SipPhone() {
 
   const classes = useStyles();
 
-  switch (operador_estado_extension) {
+  switch (usuario_estado_extension) {
     case "1":
       botonDisabled = true
       break

@@ -30,18 +30,18 @@ const MenuProps = {
 export default function SelectUsuariosSector(props) {
     
     const menu_usuarios = useSelector(menuUsuarios)
-    const [lusuarios, setLusuarios] = useState(menu_usuarios);
+    const [usuarios, setUsuarios] = useState(menu_usuarios);
+    let imprime_usuarios = []
 
     useEffect(() => {
-        setLusuarios(
+        setUsuarios(
             menu_usuarios
         );
     }, [menu_usuarios]);
-    
-    let usuarios = []
-    Object.entries(lusuarios).forEach(([key, v]) => {
-        if (v.usuario_sectores.includes(props.valor1)) {
-            usuarios.push({ id: key, value: v.usuario_apellido + " " + v.usuario_nombre + " | " + v.usuario_usuario});
+        
+    Object.entries(usuarios).forEach(([key, v]) => {
+        if (v.usuario_listaSectores.includes(props.valor1)) {
+            imprime_usuarios.push({ id: key, value: v.usuario_apellido + " " + v.usuario_nombre + " | " + v.usuario_usuario});
         }
     });
 
@@ -58,7 +58,7 @@ export default function SelectUsuariosSector(props) {
                     onChange={props.handleChange}
                     MenuProps={MenuProps}
                 >
-                    {usuarios.map((usuario) => (
+                    {imprime_usuarios.map((usuario) => (
                         <MenuItem key={usuario.id} value={parseInt(usuario.id)}>{usuario.value}
                         </MenuItem>
                     ))}

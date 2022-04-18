@@ -10,11 +10,11 @@ import { menuEstados, usuarioEstados } from '../redux/selectors';
 export default function SelectEstadoUsuario(props) {
     const menu_estados = useSelector(menuEstados)
     const usuario_estados = useSelector(usuarioEstados)
+    let imprime_estados = []
     
-    let estados = []
     Object.entries(menu_estados).forEach(([key, v]) => {
         if (usuario_estados.includes(Math.floor(key))) {
-            estados.push({ id: key, value: v });
+            imprime_estados.push({ id: key, value: v });
         }
     });
 
@@ -29,7 +29,7 @@ export default function SelectEstadoUsuario(props) {
                     label="Estado"
                     onChange={props.handleChange}
                     >
-                    {estados.map((estado) => (
+                    {imprime_estados.map((estado) => (
                         <MenuItem key={estado.id} value={parseInt(estado.id)}>
                             <ListItemText primary={estado.value} />
                         </MenuItem>

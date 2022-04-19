@@ -50,6 +50,10 @@ function getMessage(mensaje) {
     let msg = JSON.parse(mensaje.payload.message)
     console.log("El mensaje entrante es: ", msg)
     switch (msg.code) {
+        case 2001:
+            store.dispatch(menuUsuarios(msg.value22))
+            break
+            
         case 2002:
             console.log("Llega el estado del usuario: ",msg.value2)
             store.dispatch(msgEntranteAlmacena(msg))

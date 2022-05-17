@@ -25,7 +25,7 @@ export default function EstadoRT(props) {
     let id_estado = menu_usuarios[id_usuario].usuario_estadoOperador
 
     useEffect(() => {
-        setEstadoNombre(menu_estados[id_estado])
+        setEstadoNombre(menu_estados[id_estado].estado_nombre)
         if (id_estado == 1) {
             setTipo('success')
         } else {

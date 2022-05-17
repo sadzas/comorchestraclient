@@ -7,22 +7,21 @@ export const usuarioId = state => state.usuario_id
 export const usuarioPerfil = state => state.usuario_perfil
 export const usuarioUsuario = state => state.usuario_usuario
 
-export const usuarioEstadoOperador = state => state.usuario_estado_operador
-export const usuarioEstadoExtension = state => state.usuario_estado_extension
-export const usuarioEstadoChat = state => state.usuario_estado_chat
+export const usuarioEstadoOperador = state => state.usuario_estadoOperador
+export const usuarioEstadoExtension = state => state.usuario_estadoExtension
+export const usuarioEstadoChat = state => state.usuario_estadoChat
 
 export const operadorExtensionUS = state => state.operador_extension_US
 export const operadorExtensionUA = state => state.operador_extension_UA
 export const operadorExtensionPW = state => state.operador_extension_PW
 export const operadorExtensionSV = state => state.operador_extension_SV
 
-
 export const usuarioMenuColaPropiedades = state => state.usuario_menu_cola_propiedades
 
 export const usuarioEstados = state => state.usuario_estados
-export const usuarioPermisosOperacion = state => state.usuario_permisos_operacion
-export const usuarioPermisosSupervision = state => state.usuario_permisos_supervision
-export const usuarioPermisosAdministracion = state => state.usuario_permisos_administracion
+export const usuarioListaPermisosOperacion = state => state.usuario_listaPermisosOperacion
+export const usuarioListaPermisosSupervision = state => state.usuario_listaPermisosSupervision
+export const usuarioListaPermisosAdministracion = state => state.usuario_listaPermisosAdministracion
 
 export const menuEstados = state => state.menu_estados
 export const menuEstadosGrupos = state => state.menu_estados_grupos

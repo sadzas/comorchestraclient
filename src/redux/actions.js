@@ -4,12 +4,12 @@ import {
   REDUX_FLAG_ESTADO,
   REDUX_FLAG_TITULO,
   REDUX_FLAG_MENSAJE,
-  REDUX_WEBSOCKET_ESTADO,
+  REDUX_WEBSOCKET_LOGUEADO,
 
   REDUX_USUARIO_DATOS_PERSONALES,
-  REDUX_USUARIO_OPERACION,
-  REDUX_USUARIO_SUPERVISION,
-  REDUX_USUARIO_ADMINISTRACION,
+  REDUX_USUARIO_LISTA_PERMISOSOPERACION,
+  REDUX_USUARIO_LISTA_PERMISOSSUPERVISION,
+  REDUX_USUARIO_LISTA_PERMISOSADMINISTRACION,
   REDUX_USUARIO_ESTADOS,
   
   REDUX_USUARIO_ESTADO_OPERADOR,
@@ -78,9 +78,9 @@ export const msgEntranteAlmacena = (mensaje) => {
   }
 }
 
-export const msgEntranteEstado = () => {
+export const usuarioLogueado = () => {
   return {
-    type: REDUX_WEBSOCKET_ESTADO
+    type: REDUX_WEBSOCKET_LOGUEADO
   }
 }
 
@@ -91,23 +91,23 @@ export const usuarioDatosPersonales = (mensaje) => {
   }
 }
 
-export const usuarioPermisosOperacion = (mensaje) => {
+export const usuarioListaPermisosOperacion = (mensaje) => {
   return {
-    type: REDUX_USUARIO_OPERACION,
+    type: REDUX_USUARIO_LISTA_PERMISOSOPERACION,
     mensaje
   }
 }
 
-export const usuarioPermisosSupervision = (mensaje) => {
+export const usuarioListaPermisosSupervision = (mensaje) => {
   return {
-    type: REDUX_USUARIO_SUPERVISION,
+    type: REDUX_USUARIO_LISTA_PERMISOSSUPERVISION,
     mensaje
   }
 }
 
-export const usuarioPermisosAdministracion = (mensaje) => {
+export const usuarioListaPermisosAdministracion = (mensaje) => {
   return {
-    type: REDUX_USUARIO_ADMINISTRACION,
+    type: REDUX_USUARIO_LISTA_PERMISOSADMINISTRACION,
     mensaje
   }
 }

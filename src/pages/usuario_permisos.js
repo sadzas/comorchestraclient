@@ -33,7 +33,7 @@ export default function UsuarioPermisos() {
 
   const usuarioSelecciona = (event) => {
     setUsuario(event.target.value)
-    setPermisos(menu_usuarios[event.target.value].usuario_permisos_operacion)
+    setPermisos(menu_usuarios[event.target.value].usuario_listaPermisosOperacion)
   };
 
   const permisoSelecciona = (event) => {

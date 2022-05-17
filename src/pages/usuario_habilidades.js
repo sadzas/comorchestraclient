@@ -79,7 +79,7 @@ export default function UsuarioHabilidades() {
             <Grid container rowSpacing={2} columnSpacing={{ xs: 6, sm: 2, md: 3 }} paddingBottom={1} >
               <Grid item xs={6}>
                 <Box sx={{ '& > :not(style)': { width: '100%' }, }} noValidate autoComplete="off" required>
-                  <SelectSector valor={sector} handleChange={sectorSelecciona} />
+                  <SelectSector valor1={sector} handleChange={sectorSelecciona} />
                 </Box>
               </Grid>
             </Grid>

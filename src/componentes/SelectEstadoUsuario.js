@@ -14,7 +14,7 @@ export default function SelectEstadoUsuario(props) {
     
     Object.entries(menu_estados).forEach(([key, v]) => {
         if (usuario_estados.includes(Math.floor(key))) {
-            imprime_estados.push({ id: key, value: v });
+            imprime_estados.push({ id: key, value: v.estado_nombre });
         }
     });
 

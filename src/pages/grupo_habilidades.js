@@ -33,6 +33,7 @@ export default function GrupoHabilidades() {
   const [habilidades, setHabilidades] = useState([]);
   const usuario_id = useSelector(usuarioId)
   const menu_habilidades_grupos = useSelector(menuHabilidadesGrupos)
+  const menu_usuarios = useSelector(menuUsuarios)
   let blockHabilidades = false
 
   const sectorSelecciona = (event) => {
@@ -44,6 +45,15 @@ export default function GrupoHabilidades() {
   const grupoSelecciona = (event) => {
     setGrupo(event.target.value)
     setHabilidades(menu_habilidades_grupos[event.target.value].grupo_habilidad_valor)
+    let temp = []
+
+    Object.entries(menu_usuarios).forEach(([key, v]) => {
+      if (v.id_grupo_habilidad == event.target.value) {
+        temp.push(v.id_usuario)
+        
+      }
+    });
+    setUsuarios(temp)
   };
 
   const usuarioSelecciona = (event) => {
@@ -78,7 +88,7 @@ export default function GrupoHabilidades() {
     <Grid container spacing={20}>
       <Grid item xs={12} lg={12}>
         <Paper sx={{ p: 1, display: 'flex', flexDirection: 'column', height: 'auto', }} >
-        <Box component="form" onSubmit={enviarInformacion} sx={{ '& > :not(style)': { m: 1, width: '100%' }, }}>
+          <Box component="form" onSubmit={enviarInformacion} sx={{ '& > :not(style)': { m: 1, width: '100%' }, }}>
 
             <Typography variant="h5" component="h2" align="center" display="block" color="#666">
               ASIGNAR GRUPOS DE HABILIDADES
@@ -94,7 +104,7 @@ export default function GrupoHabilidades() {
             <Grid container rowSpacing={2} columnSpacing={{ xs: 6, sm: 2, md: 3 }} paddingBottom={1} >
               <Grid item xs={6}>
                 <Box sx={{ '& > :not(style)': { width: '100%' }, }} noValidate autoComplete="off" required>
-                  <SelectSector valor={sector} handleChange={sectorSelecciona} />
+                  <SelectSector valor1={sector} handleChange={sectorSelecciona} />
                 </Box>
               </Grid>
             </Grid>

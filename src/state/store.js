@@ -17,20 +17,24 @@ const reduxWebsocketMiddleware = reduxWebsocket();
 export const store = createStore(
     reducer,
     {
+        wsEstadoSesion: 0,
+
         usuario_id: 0,
         usuario_perfil: 0,
         usuario_usuario: "",
         usuario_nombre: "",
         usuario_apellido: "",
+
         usuario_estados: [],
+        
+        usuario_estadoOperador: "",
+        usuario_estadoExtension: "",
+        usuario_estadoChat: "",
 
-        usuario_listaPermisosOperacion: [1, 2, 3],
-        usuario_listaPermisosSupervision: [4, 5, 6],
-        usuario_listaPermisosAdministracion: [7, 8, 9],
-
-        wsEstadoSesion: 0,
-        mensaje_saliente: "",
-        mensaje_entrante: "",
+        usuario_listaPermisosOperacion: [],
+        usuario_listaPermisosSupervision: [],
+        usuario_listaPermisosAdministracion: [],
+                
         alertaGeneral_flag: false,
         alertaGeneral_titulo: "",
         alertaGeneral_mensaje: "",
@@ -55,14 +59,13 @@ export const store = createStore(
         realtime_usuarios: [],
         realtime_listado_colas: [],
 
-        usuario_estadoOperador: "",
-        usuario_estadoExtension: "",
-        usuario_estadoChat: "",
-
         operador_extension_US: "201",
         operador_extension_UA: "sip:201@comorchestra.mooo.com",
         operador_extension_PW: "qWeRtY00",
-        operador_extension_SV: "wss://comorchestra.mooo.com:8089/ws"
+        operador_extension_SV: "wss://comorchestra.mooo.com:8089/ws",
+
+        mensaje_saliente: "",
+        mensaje_entrante: ""
     },
 
     compose(

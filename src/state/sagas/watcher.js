@@ -4,12 +4,13 @@ import { send } from '@giantmachines/redux-websocket'
 import { store } from '../store';
 import {
     msgEntranteAlmacena,
-    msgEntranteEstado,
+    
+    usuarioLogueado,
 
     usuarioDatosPersonales,
-    usuarioPermisosOperacion,
-    usuarioPermisosSupervision,
-    usuarioPermisosAdministracion,
+    usuarioListaPermisosOperacion,
+    usuarioListaPermisosSupervision,
+    usuarioListaPermisosAdministracion,
 
     usuarioEstados,
     alertaCambiaFlagEstado,
@@ -49,34 +50,56 @@ export function* watcher() {
 function getMessage(mensaje) {
     let msg = JSON.parse(mensaje.payload.message)
     console.log("El mensaje entrante es: ", msg)
+    store.dispatch(msgEntranteAlmacena(msg))
     switch (msg.code) {
         case 2001:
             store.dispatch(menuUsuarios(msg.value22))
             break
-            
-        case 2002:
-            console.log("Llega el estado del usuario: ",msg.value2)
-            store.dispatch(msgEntranteAlmacena(msg))
+
+        case 2002: // OK => Logueo
+            store.dispatch(usuarioDatosPersonales(msg)) // Reune los siguientes datos: ID, PERFIL, NOMBRE, APELLIDO, USUARIO
+            store.dispatch(usuarioEstadoOperador(msg.value2))
+            store.dispatch(usuarioEstadoExtension(msg.value3))
+            store.dispatch(usuarioListaPermisosOperacion(msg.value11))
+            store.dispatch(usuarioListaPermisosSupervision(msg.value12))
+            store.dispatch(usuarioListaPermisosAdministracion(msg.value13))
+            store.dispatch(usuarioEstados(msg.value14))
+            store.dispatch(usuarioLogueado())
+            break
+
+        case 2003: // OK => Logueo
+            store.dispatch(menuColas(msg.value21))
+            store.dispatch(menuUsuarios(msg.value22))
+            store.dispatch(menuSectores(msg.value23))
+            store.dispatch(menuEstados(msg.value24))
+            store.dispatch(menuHabilidades(msg.value25))
+            store.dispatch(menuPermisos(msg.value28))
+            store.dispatch(menuSectoresHabilidades(msg.value29))
+            store.dispatch(menuSectoresEstados(msg.value30))
+            store.dispatch(menuHabilidadesGrupos(msg.value31))
+            store.dispatch(menuEstadosGrupos(msg.value32))
+            store.dispatch(menuDepartamentos(msg.value33))
+            break
+
+        case 2010: // OK => Cambia Estado
             store.dispatch(usuarioEstadoOperador(msg.value2))
             break
 
         case 2201:
             //store.dispatch(msgEntranteAlmacena(msg))
-            store.dispatch(alertaCambiaFlagTitulo(msg.value6))
-            store.dispatch(alertaCambiaFlagMensaje(msg.value7))
+            store.dispatch(alertaCambiaFlagTitulo(msg.value8))
+            store.dispatch(alertaCambiaFlagMensaje(msg.value9))
             store.dispatch(alertaCambiaFlagEstado(true))
             break
         // 2101: Se loguea un Usuario
         case 2101:
             store.dispatch(msgEntranteAlmacena(msg))
             store.dispatch(usuarioDatosPersonales(msg))
-            store.dispatch(usuarioPermisosOperacion(msg.value11))
-            store.dispatch(usuarioPermisosSupervision(msg.value12))
-            store.dispatch(usuarioPermisosAdministracion(msg.value13))
-            store.dispatch(usuarioEstados(msg.value14))
+            
+            
             store.dispatch(usuarioEstadoOperador(msg.value2))
 
-            store.dispatch(msgEntranteEstado())
+            //store.dispatch(msgEntranteEstado())
             break
         // 2102: Cambia estado general del operador
         case 2102:
@@ -124,9 +147,15 @@ function getMessage(mensaje) {
         case 3501:
             store.dispatch(menuSectores(msg.value23))
             break
-        case 4003:
+
+        case 4001: // OK
+            store.dispatch(menuUsuarios(msg.value22))
+            break
+
+        case 4003: // OK
             store.dispatch(usuarioEstados(msg.value14))
             break
+
         // 4101: Se envian los datos de: Gerencia => Departamento => Sector de acuerdo al perfil obtenido.
         case 4401:
             store.dispatch(menuHabilidades(msg.value25))
@@ -135,10 +164,19 @@ function getMessage(mensaje) {
         case 4402:
             store.dispatch(menuHabilidadesGrupos(msg.value31))
             break
+        case 4404: // OK
+            store.dispatch(menuUsuarios(msg.value22))
+            store.dispatch(menuHabilidadesGrupos(msg.value31))
+            break
+        case 4405: // OK
+            store.dispatch(menuUsuarios(msg.value22))
+            store.dispatch(menuEstadosGrupos(msg.value32))
+            break
+            
         case 4601:
             store.dispatch(menuEstados(msg.value24))
             break
-        case 4602:
+        case 4602: // OK
             store.dispatch(menuEstadosGrupos(msg.value32))
             break
         case 4603:

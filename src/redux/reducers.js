@@ -6,16 +6,16 @@ import {
     REDUX_WEBSOCKET_DISCONNECT,
     REDUX_WEBSOCKET_CLOSED,
     REDUX_WEBSOCKET_ERROR,
-    REDUX_WEBSOCKET_ESTADO,
+    REDUX_WEBSOCKET_LOGUEADO,
     REDUX_MSG_SALIENTE,
     REDUX_MSG_ENTRANTE,
     REDUX_FLAG_TITULO,
     REDUX_FLAG_ESTADO,
     REDUX_FLAG_MENSAJE,
     REDUX_USUARIO_DATOS_PERSONALES,
-    REDUX_USUARIO_OPERACION,
-    REDUX_USUARIO_SUPERVISION,
-    REDUX_USUARIO_ADMINISTRACION,
+    REDUX_USUARIO_LISTA_PERMISOSOPERACION,
+    REDUX_USUARIO_LISTA_PERMISOSSUPERVISION,
+    REDUX_USUARIO_LISTA_PERMISOSADMINISTRACION,
     REDUX_USUARIO_ESTADOS,
     REDUX_USUARIO_ESTADO_OPERADOR,
     REDUX_USUARIO_ESTADO_EXTENSION,
@@ -70,11 +70,6 @@ export const reducer = (state, action) => {
                 ...state, wsEstadoSesion: 0
             }
 
-        case REDUX_WEBSOCKET_OPEN:
-            return {
-                ...state, wsEstadoSesion: 1
-            }
-
         case REDUX_WEBSOCKET_SEND:
             return {
                 ...state
@@ -85,7 +80,12 @@ export const reducer = (state, action) => {
                 ...state
             }
 
-        case REDUX_WEBSOCKET_ESTADO:
+        case REDUX_WEBSOCKET_OPEN:
+            return {
+                ...state, wsEstadoSesion: 1
+            }
+
+        case REDUX_WEBSOCKET_LOGUEADO:
             return {
                 ...state, wsEstadoSesion: 2
             }
@@ -122,22 +122,27 @@ export const reducer = (state, action) => {
 
         case REDUX_USUARIO_DATOS_PERSONALES:
             return {
-                ...state, usuario_id: action.mensaje.value1, usuario_perfil: action.mensaje.value4, usuario_nombre: action.mensaje.value6, usuario_apellido: action.mensaje.value7, usuario_usuario: action.mensaje.value8
+                ...state, 
+                usuario_id: action.mensaje.value1, 
+                usuario_perfil: action.mensaje.value4, 
+                usuario_nombre: action.mensaje.value6, 
+                usuario_apellido: action.mensaje.value7, 
+                usuario_usuario: action.mensaje.value8
             }
 
-        case REDUX_USUARIO_OPERACION:
+        case REDUX_USUARIO_LISTA_PERMISOSOPERACION:
             return {
-                ...state, usuario_permisos_operacion: action.mensaje
+                ...state, usuario_listaPermisosOperacion: action.mensaje
             }
 
-        case REDUX_USUARIO_SUPERVISION:
+        case REDUX_USUARIO_LISTA_PERMISOSSUPERVISION:
             return {
-                ...state, usuario_permisos_supervision: action.mensaje
+                ...state, usuario_listaPermisosSupervision: action.mensaje
             }
 
-        case REDUX_USUARIO_ADMINISTRACION:
+        case REDUX_USUARIO_LISTA_PERMISOSADMINISTRACION:
             return {
-                ...state, usuario_permisos_administracion: action.mensaje
+                ...state, usuario_listaPermisosAdministracion: action.mensaje
             }
 
         case REDUX_USUARIO_ESTADOS:
@@ -147,17 +152,17 @@ export const reducer = (state, action) => {
 
         case REDUX_USUARIO_ESTADO_OPERADOR:
             return {
-                ...state, usuario_estado_operador: action.mensaje
+                ...state, usuario_estadoOperador: action.mensaje
             }
 
         case REDUX_USUARIO_ESTADO_EXTENSION:
             return {
-                ...state, usuario_estado_extension: action.mensaje
+                ...state, usuario_estadoExtension: action.mensaje
             }
 
         case REDUX_USUARIO_ESTADO_CHAT:
             return {
-                ...state, usuario_estado_chat: action.mensaje
+                ...state, usuario_estadoChat: action.mensaje
             }
         case REDUX_MENU_DEPARTAMENTOS:
             return {

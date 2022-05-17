@@ -37,7 +37,7 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import StarBorder from '@mui/icons-material/StarBorder';
 import { useSelector } from 'react-redux';
-import { usuarioPerfil, usuarioPermisosOperacion, usuarioPermisosSupervision, usuarioPermisosAdministracion } from '../redux/selectors';
+import { usuarioPerfil, usuarioListaPermisosOperacion, usuarioListaPermisosSupervision, usuarioListaPermisosAdministracion } from '../redux/selectors';
 import { Link } from "react-router-dom";
 
 /**
@@ -55,9 +55,9 @@ import { Link } from "react-router-dom";
 export default function MainListItems() {
 
   const usuario_perfil = useSelector(usuarioPerfil)
-  const usuario_permisos_operacion = useSelector(usuarioPermisosOperacion)
-  const usuario_permisos_supervision = useSelector(usuarioPermisosSupervision)
-  const usuario_permisos_administracion = useSelector(usuarioPermisosAdministracion)
+  const usuario_permisos_operacion = useSelector(usuarioListaPermisosOperacion)
+  const usuario_permisos_supervision = useSelector(usuarioListaPermisosSupervision)
+  const usuario_permisos_administracion = useSelector(usuarioListaPermisosAdministracion)
 
   const [usuariosAdmin, setUsuariosAdmin] = useState(false);
   const [colasAdmin, setColasAdmin] = useState(false);
@@ -410,7 +410,7 @@ export default function MainListItems() {
               </ListItemIcon>
               <ListItemText primary="Agregar" />
             </ListItemButton>
-            
+
             <ListItemButton sx={{ pl: 4 }} component={Link} to="/habilidad_asignar">
               <ListItemIcon>
                 <LegendToggleTwoToneIcon />
@@ -450,7 +450,7 @@ export default function MainListItems() {
               </ListItemIcon>
               <ListItemText primary="Editar" />
             </ListItemButton>
-            
+
             <ListItemButton sx={{ pl: 4 }} component={Link} to="/estado_asignar">
               <ListItemIcon>
                 <FilterNoneTwoToneIcon />

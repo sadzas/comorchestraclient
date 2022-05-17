@@ -23,7 +23,7 @@ export default function UsuarioEstado() {
 
     const estadoUsuarioSelecciona = (event) => {
         event.preventDefault();
-        const mensaje = armoMensajeSaliente(2002, usuario_id, event.target.value)
+        const mensaje = armoMensajeSaliente(2010, usuario_id, event.target.value)
         dispatch(msgSalienteAlmacena(mensaje))
     };
 

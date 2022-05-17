@@ -5,14 +5,14 @@ import Typography from '@mui/material/Typography';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { styled } from '@mui/material/styles';
-import SelectHabilidades from '../componentes/SelectHabilidades'
-import SelectUsuariosSector from '../componentes/SelectUsuariosSector'
+import SelectEstados from '../componentes/SelectEstados'
+import SelectUsuariosSectorGrupoHabilidad from '../componentes/SelectUsuariosSectorGrupoHabilidad'
+import SelectGrupoEstadosSector from '../componentes/SelectGrupoEstadosSector'
 import SelectSector from '../componentes/SelectSector'
 import { useDispatch, useSelector } from 'react-redux';
 import { armoMensajeSaliente } from '../utils/Helpers';
 import { msgSalienteAlmacena } from '../redux/actions';
-import { usuarioId, menuUsuarios } from '../redux/selectors';
+import { usuarioId, menuUsuarios, menuEstadosGrupos } from '../redux/selectors';
 import LoadingButton from '@mui/lab/LoadingButton';
 import SaveIcon from '@mui/icons-material/Save';
 import { useState } from 'react';
@@ -25,25 +25,35 @@ const darkTheme = createTheme({
   },
 });
 
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
-
-export default function GrupoHabilidades() {
+export default function GrupoEstados() {
   const dispatch = useDispatch()
-  const [usuarios, setUsuarios] = useState([]);
+  const [grupo, setGrupo] = useState([]);
   const [sector, setSector] = useState('');
-  const [habilidades, setHabilidades] = useState([]);
+  const [usuarios, setUsuarios] = useState([]);
+  const [estados, setEstados] = useState([]);
   const usuario_id = useSelector(usuarioId)
+  const menu_estados_grupos = useSelector(menuEstadosGrupos)
   const menu_usuarios = useSelector(menuUsuarios)
   let blockHabilidades = false
 
   const sectorSelecciona = (event) => {
     setSector(event.target.value)
+    setGrupo([]);
     setUsuarios([]);
+  };
+
+  const grupoSelecciona = (event) => {
+    setGrupo(event.target.value)
+    setEstados(menu_estados_grupos[event.target.value].listado_estados)
+    let temp = []
+
+    Object.entries(menu_usuarios).forEach(([key, v]) => {
+      if (v.id_grupo_estado == event.target.value) {
+        temp.push(v.id_usuario)
+        
+      }
+    });
+    setUsuarios(temp)
   };
 
   const usuarioSelecciona = (event) => {
@@ -55,23 +65,19 @@ export default function GrupoHabilidades() {
     );
   };
 
-  const habilidadSelecciona = name => (event) => {
+  const estadoSelecciona = (event) => {
     const {
       target: { value },
     } = event;
-    setHabilidades({ ...habilidades, [name]: value })
+    setEstados(
+      typeof value === 'string' ? value.split(',') : value,
+    );
   };
 
   const enviarInformacion = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
 
-    let parseo = []
-    Object.entries(habilidades).forEach(([key, v]) => {
-      parseo.push(Math.floor(key), v)
-    });
-
-    const mensaje = armoMensajeSaliente(4403, usuario_id, "", "", "", "", "", "", "", "", "", usuarios, parseo)
+    const mensaje = armoMensajeSaliente(4405, usuario_id, sector, grupo, "", "", "", "", "", "", "", usuarios, estados)
     dispatch(msgSalienteAlmacena(mensaje))
   };
 
@@ -82,20 +88,35 @@ export default function GrupoHabilidades() {
         <Box component="form" onSubmit={enviarInformacion} sx={{ '& > :not(style)': { m: 1, width: '100%' }, }}>
 
             <Typography variant="h5" component="h2" align="center" display="block" color="#666">
-              ASIGNAR HABILIDADES
+              ASIGNAR GRUPOS DE ESTADOS
             </Typography>
 
             <Box sx={{ '& > :not(style)': { width: '100%' }, }} >
               <ThemeProvider theme={darkTheme}>
                 <AppBar position="static" color="primary" sx={{ paddingLeft: '50px', color: '#fff' }}>
-                  Sector
+                  Seleccione el Sector
                 </AppBar>
               </ThemeProvider>
             </Box>
             <Grid container rowSpacing={2} columnSpacing={{ xs: 6, sm: 2, md: 3 }} paddingBottom={1} >
               <Grid item xs={6}>
                 <Box sx={{ '& > :not(style)': { width: '100%' }, }} noValidate autoComplete="off" required>
-                  <SelectSector valor={sector} handleChange={sectorSelecciona} />
+                  <SelectSector valor1={sector} handleChange={sectorSelecciona} />
+                </Box>
+              </Grid>
+            </Grid>
+
+            <Box sx={{ '& > :not(style)': { width: '100%' }, }} >
+              <ThemeProvider theme={darkTheme}>
+                <AppBar position="static" color="primary" sx={{ paddingLeft: '50px', color: '#fff' }}>
+                  Seleccione el grupo de Estados
+                </AppBar>
+              </ThemeProvider>
+            </Box>
+            <Grid container rowSpacing={2} columnSpacing={{ xs: 6, sm: 2, md: 3 }} paddingBottom={1} >
+              <Grid item xs={6}>
+                <Box sx={{ '& > :not(style)': { width: '100%' }, }} noValidate autoComplete="off" required >
+                  <SelectGrupoEstadosSector valor1={sector} valor2={grupo} handleChange={grupoSelecciona} />
                 </Box>
               </Grid>
             </Grid>
@@ -110,7 +131,7 @@ export default function GrupoHabilidades() {
             <Grid container rowSpacing={2} columnSpacing={{ xs: 6, sm: 2, md: 3 }} paddingBottom={1} >
               <Grid item xs={6}>
                 <Box sx={{ '& > :not(style)': { width: '100%' }, }} noValidate autoComplete="off" required >
-                  <SelectUsuariosSector valor1={sector} valor2={usuarios} handleChange={usuarioSelecciona} />
+                  <SelectUsuariosSectorGrupoHabilidad valor1={sector} valor2={usuarios} valor3={grupo} handleChange={usuarioSelecciona} />
                 </Box>
               </Grid>
             </Grid>
@@ -118,14 +139,14 @@ export default function GrupoHabilidades() {
             <Box sx={{ '& > :not(style)': { width: '100%' }, }} >
               <ThemeProvider theme={darkTheme}>
                 <AppBar position="static" color="primary" sx={{ paddingLeft: '50px', color: '#fff' }}>
-                  Habilidades
+                  Estados
                 </AppBar>
               </ThemeProvider>
             </Box>
             <Grid container rowSpacing={2} columnSpacing={{ xs: 6, sm: 2, md: 3 }} paddingBottom={1}>
               <Grid item xs={12}>
                 <Box sx={{ '& > :not(style)': { width: '80%' }, }} noValidate autoComplete="off" required>
-                  <SelectHabilidades ver={blockHabilidades} valor1={sector} valor2={habilidades} handleChange={habilidadSelecciona} />
+                  <SelectEstados ver={blockHabilidades} valor1={sector} valor2={estados} handleChange={estadoSelecciona} />
                 </Box>
               </Grid>
             </Grid>

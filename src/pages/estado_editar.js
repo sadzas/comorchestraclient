@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { msgSalienteAlmacena } from '../redux/actions';
 import { armoMensajeSaliente } from '../utils/Helpers';
 import { usuarioId, menuEstados } from '../redux/selectors';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import LoadingButton from '@mui/lab/LoadingButton';
 import SaveIcon from '@mui/icons-material/Save';
 import FormControlLabel from '@mui/material/FormControlLabel';

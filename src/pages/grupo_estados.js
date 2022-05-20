@@ -48,7 +48,7 @@ export default function GrupoEstados() {
     let temp = []
 
     Object.entries(menu_usuarios).forEach(([key, v]) => {
-      if (v.id_grupo_estado == event.target.value) {
+      if (v.id_grupo_estado === event.target.value) {
         temp.push(v.id_usuario)
         
       }

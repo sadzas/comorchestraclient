@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { useSelector } from 'react-redux';
-import { menuUsuarios, realtimeUsuarios } from '../redux/selectors';
+import { realtimeUsuarios } from '../redux/selectors';
 import { useState, useEffect } from 'react';
 import SegunderoActividad from '../componentes/SegunderoActividad'
 import SegunderoEstado from '../componentes/SegunderoEstado'

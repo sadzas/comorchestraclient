@@ -26,7 +26,7 @@ export default function EstadoRT(props) {
 
     useEffect(() => {
         setEstadoNombre(menu_estados[id_estado].estado_nombre)
-        if (id_estado == 1) {
+        if (id_estado === 1) {
             setTipo('success')
         } else {
             setTipo('amarillo')

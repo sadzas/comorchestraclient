@@ -1,12 +1,12 @@
 import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Chip from '@mui/material/Chip';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import SelectEstadoUsuario from '../componentes/SelectEstadoUsuario'
 import { usuarioEstadoOperador, usuarioId, usuarioEstadoExtension } from '../redux/selectors';
-import { useDispatch, useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
 import { msgSalienteAlmacena } from '../redux/actions';
 import { armoMensajeSaliente } from '../utils/Helpers';
 
@@ -16,7 +16,7 @@ export default function UsuarioEstado() {
     const usuario_estado_extension = useSelector(usuarioEstadoExtension);
     const [estado, setEstado] = useState('')
     const usuario_id = useSelector(usuarioId);
-    
+
     let usuarioColor = "default";
     let extensionColor = "default";
     let chatColor = "default";
@@ -48,7 +48,7 @@ export default function UsuarioEstado() {
             extensionColor = "warning"
             break
     }
-    
+
     return (
         <div>
             <Box sx={{ flexGrow: 1 }}>
@@ -58,20 +58,19 @@ export default function UsuarioEstado() {
                     </Grid>
                     <Grid item xs={6} alignItems="center">
                         <Grid container spacing={1} columns={12} >
-                            <Grid item xs={3} >
-                                <Chip color={usuarioColor} label="Operador" avatar={<Avatar>O</Avatar>} />
+                            <Grid item xs={2} >
+                                <Chip color={usuarioColor} label="Operador" avatar={<Avatar>O</Avatar>} size="small" />
                             </Grid>
-                            <Grid item xs={3}>
-                                <Chip color={extensionColor} label="Extension" avatar={<Avatar>E</Avatar>} />
+                            <Grid item xs={2}>
+                                <Chip color={extensionColor} label="Extension" avatar={<Avatar>E</Avatar>} size="small" />
                             </Grid>
-                            <Grid item xs={3}>
-                                <Chip color={chatColor} label="Chat" avatar={<Avatar>C</Avatar>} />
+                            <Grid item xs={2}>
+                                <Chip color={chatColor} label="Chat" avatar={<Avatar>C</Avatar>} size="small" />
                             </Grid>
                         </Grid>
                     </Grid>
                 </Grid>
             </Box>
-
         </div>
     );
 }

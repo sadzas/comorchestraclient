@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Switch, Route } from "react-router-dom";
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
+import { useSelector } from 'react-redux';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
@@ -39,6 +40,7 @@ import EstadoEditar from './estado_editar'
 import GrupoHabilidades from './grupo_habilidades'
 import GrupoEstados from './grupo_estados'
 import Grid from '@mui/material/Grid';
+import { usuarioUsuario } from '../redux/selectors';
 
 function Copyright(props) {
   return (
@@ -102,6 +104,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const mdTheme = createTheme();
 
 export default function Board({ children }) {
+  const usuario_usuario = useSelector(usuarioUsuario);
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -117,7 +120,7 @@ export default function Board({ children }) {
               <MenuIcon />
             </IconButton>
             <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-              Panel de Usuario
+              {usuario_usuario}
             </Typography>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
@@ -164,7 +167,7 @@ export default function Board({ children }) {
               */}
             </Grid>
             <Switch>
-              <Route exact path="/" component={PanelUsuario} />
+              {/*<Route exact path="/" component={PanelUsuario} />*/}
               <Route path="/usuario_agregar" component={UsuarioAgregar} />
               <Route path="/usuario_editar" component={UsuarioEditar} />
               <Route path="/sector_agregar" component={SectorAgregar} />

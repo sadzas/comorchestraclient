@@ -48,7 +48,7 @@ export default function GrupoHabilidades() {
     let temp = []
 
     Object.entries(menu_usuarios).forEach(([key, v]) => {
-      if (v.id_grupo_habilidad == event.target.value) {
+      if (v.id_grupo_habilidad === event.target.value) {
         temp.push(v.id_usuario)
         
       }

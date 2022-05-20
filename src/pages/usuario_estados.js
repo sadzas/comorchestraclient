@@ -57,8 +57,6 @@ export default function UsuarioEstados() {
   const enviarInformacion = (event) => {
     event.preventDefault();
 
-    console.log("Los estados que se envian son: ",estados)
-
     const mensaje = armoMensajeSaliente(4003, usuario_id, usuario, sector, "", "", "", "", "", "", "", estados)
     dispatch(msgSalienteAlmacena(mensaje))
   };

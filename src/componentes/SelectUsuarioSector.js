@@ -17,10 +17,9 @@ import { useState, useEffect } from 'react';
  * @returns 
  */
 export default function SelectUsuarioSector(props) {
-    
     const menu_usuarios = useSelector(menuUsuarios)
     const [usuarios, setUsuarios] = useState(menu_usuarios);
-    let imprime_usuarios = []
+    let usuarios_imprime = []
 
     useEffect(() => {
         setUsuarios(
@@ -30,7 +29,7 @@ export default function SelectUsuarioSector(props) {
         
     Object.entries(usuarios).forEach(([key, v]) => {
         if (v.usuario_listaSectores.includes(props.valor1)) {
-            imprime_usuarios.push({ id: key, value: v.usuario_apellido + " " + v.usuario_nombre + " | " + v.usuario_usuario});
+            usuarios_imprime.push({ id: key, value: v.usuario_apellido + " " + v.usuario_nombre + " | " + v.usuario_usuario});
         }
     });
 
@@ -45,7 +44,7 @@ export default function SelectUsuarioSector(props) {
                     label="Operador"
                     onChange={props.handleChange}
                 >
-                    {imprime_usuarios.map((usuario) => (
+                    {usuarios_imprime.map((usuario) => (
                         <MenuItem key={usuario.id} value={parseInt(usuario.id)}>
                             <ListItemText primary={usuario.value} />
                         </MenuItem>

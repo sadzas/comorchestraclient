@@ -20,7 +20,7 @@ export default function SelectEstadoUsuario(props) {
 
     return (
         <div>
-            <FormControl sx={{ m: 1, flexGrow: 1, display: 'flex' }} >
+            <FormControl sx={{ m: 1, flexGrow: 1, display: 'flex' }} size="small" >
                 <InputLabel id="select-estado-usuario-label">Estado</InputLabel>
                 <Select
                     labelId="select-estado-usuario"

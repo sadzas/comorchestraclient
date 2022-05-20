@@ -16,19 +16,18 @@ import { useState, useEffect } from 'react';
  * @returns 
  */
 export default function SelectUsuario(props) {
-    
     const menu_usuarios = useSelector(menuUsuarios)
-    const [lusuarios, setLusuarios] = useState(menu_usuarios);
+    const [usuarios, setUsuarios] = useState(menu_usuarios);
+    let usuarios_imprime = []
 
     useEffect(() => {
-        setLusuarios(
+        setUsuarios(
             menu_usuarios
         );
     }, [menu_usuarios]);
     
-    let usuarios = []
-    Object.entries(lusuarios).forEach(([key, v]) => {
-        usuarios.push({ id: key, value: v.usuario_apellido + " " + v.usuario_nombre + " | " + v.usuario_usuario});
+    Object.entries(usuarios).forEach(([key, v]) => {
+        usuarios_imprime.push({ id: key, value: v.usuario_apellido + " " + v.usuario_nombre + " | " + v.usuario_usuario});
     });
 
     return (
@@ -42,7 +41,7 @@ export default function SelectUsuario(props) {
                     label="Operador"
                     onChange={props.handleChange}
                 >
-                    {usuarios.map((usuario) => (
+                    {usuarios_imprime.map((usuario) => (
                         <MenuItem key={usuario.id} value={parseInt(usuario.id)}>
                             <ListItemText primary={usuario.value} />
                         </MenuItem>

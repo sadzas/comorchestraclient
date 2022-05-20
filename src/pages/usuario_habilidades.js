@@ -35,6 +35,7 @@ export default function UsuarioHabilidades() {
 
   const sectorSelecciona = (event) => {
     setSector(event.target.value)
+    setHabilidades([])
   };
 
   const usuarioSelecciona = (event) => {
@@ -56,6 +57,8 @@ export default function UsuarioHabilidades() {
     Object.entries(habilidades).forEach(([key, v]) => {
       parseo.push(Math.floor(key), v)
     });
+
+    console.log("Las habilidades son: ",parseo)
 
     const mensaje = armoMensajeSaliente(4002, usuario_id, usuario, "", "", "", "", "", "", "", "", parseo)
     dispatch(msgSalienteAlmacena(mensaje))
